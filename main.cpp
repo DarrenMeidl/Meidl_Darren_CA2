@@ -1,7 +1,7 @@
 #include <iostream>
 // Sample program main.cpp
 #include <SFML/Graphics.hpp>
-
+// CA2 by Darren Meidl GD2b
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
