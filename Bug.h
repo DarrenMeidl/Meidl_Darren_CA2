@@ -27,6 +27,7 @@ public:
     int getID(); // used for find by id function
     list<pair<int, int>> getPath();
     int getAlive(); // used in display life history function
+    pair<int, int> getPair();
 };
 
 

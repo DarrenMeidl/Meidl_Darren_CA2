@@ -15,7 +15,7 @@ using namespace std;
 // Declaring functions
 void printAllBugs(vector<Bug*> const &v);
 void findBugByID(vector<Bug*> const &v);
-void tapBoard(vector<Bug*> const &v);
+void tapBoard(vector<Bug*> &v);
 void displayLifeHistory(vector<Bug*> const &v);
 int Exit(vector<Bug*> const &v);
 void DisplayAllCells(vector<Bug*> const &v);
@@ -109,7 +109,7 @@ void findBugByID(vector<Bug*> const &v){
         cout << "bug " << userInput << " not found" << endl;
 }
 
-void tapBoard(vector<Bug*> const &v){
+void tapBoard(vector<Bug*> &v){
     for (Bug* bug : v){ // run through all the bugs in the vector
         cout << "***BEFORE MOVE***" << endl;
         bug->printBug();
@@ -166,26 +166,27 @@ void DisplayAllCells(vector<Bug*> const &v){
     int y;
     for (x = 0; x <= 9; x++){ // for each x position
         for (y = 0; y >= -9; y--){ // for each y position
+            bool isEmpty = true;
             cout << "(" << x << "," << y << "): ";
             for (Bug* bug : v) { // for each bug
-                // get this bug's position pair
                 //if this bug's position.first == x & .second == y
+                if (bug->getPair().first == x && bug->getPair().second == y){
+                    isEmpty = false;
                     // if it's a crawler
                     if (Crawler* crawler = dynamic_cast<Crawler*>(bug)) { // if the downcasted pointer bug is safely of type Crawler
-                        cout << "Crawler " << bug->getID();
+                        cout << "Crawler " << bug->getID() << " ";
                     }
                     // if it's a hopper
                     else if (Hopper* hopper = dynamic_cast<Hopper*>(bug)) { // if the downcasted pointer bug is safely of type Hopper
-                        cout << "Hopper " << bug->getID();
+                        cout << "Hopper " << bug->getID() << " ";
                     }
-                else {
-                    cout << "empty" << endl;
                 }
             }
-
+            if (isEmpty){ // by the end of the for loop, if it's still empty
+                cout << "empty" << endl; // print empty
+            } else{
+                cout << endl; // end the current line
+            }
         }
-    }
-    for (Bug* bug : v){
-
     }
 }

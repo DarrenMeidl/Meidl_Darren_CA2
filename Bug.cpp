@@ -39,3 +39,6 @@ list<pair<int, int>> Bug::getPath(){
 int Bug::getAlive() {
     return alive;
 }
+pair<int, int> Bug::getPair() {
+    return position;
+}
