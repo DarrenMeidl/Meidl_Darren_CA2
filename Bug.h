@@ -19,7 +19,7 @@ protected: // all variables below declared as protected (only this class & deriv
 public:
     // Set all default values to 0 if no arguments provided
     Bug(int id = 0, const std::pair<int, int>& position = std::make_pair(0, 0), int direction = 0, int size = 0, bool alive = false)
-            : id(id), position(position), direction(direction), size(size), alive(alive) {}
+            : id(id), position(position), direction(direction), size(size), alive(alive) {} // implement these variables
     virtual void move() = 0; // ensures this Bug class is an abstract base class by having 1 pure virtual function
     bool isWayBlocked();
 };
