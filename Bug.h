@@ -4,6 +4,7 @@
 #include <iostream>
 #include <utility>
 #include <list>
+#include <string>
 #ifndef MEIDL_DARREN_CA2_BUG_H
 #define MEIDL_DARREN_CA2_BUG_H
 
@@ -17,6 +18,7 @@ protected: // variables declared as protected (only this class & derived classes
     int size;
     bool alive;
     list<pair<int, int>> path;
+    //string name;
 public:
     // Constructor takes in an x & y ints but implements them as a pair
     Bug(int id, int x, int y, int direction, int size)
@@ -28,6 +30,7 @@ public:
     list<pair<int, int>> getPath();
     int getAlive(); // used in display life history function
     pair<int, int> getPair();
+    virtual string getName() = 0;
 };
 
 

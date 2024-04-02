@@ -70,3 +70,7 @@ void Hopper::printBug() const {
     cout << id << " Hopper " << "(" << position.first << ", " << position.second << ") "
     << size << " " << dir << " " << hopLength << " " << (alive ? "Alive" : "Dead") << endl;
 }
+
+string Hopper::getName() {
+    return name;
+}

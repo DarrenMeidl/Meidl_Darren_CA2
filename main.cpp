@@ -40,13 +40,13 @@ int main() {
         if (letter == 'C') {
             ss.ignore(1); // Ignore the semicolon
             ss >> id;
-            ss.ignore(1); // Ignore the semicolon
+            ss.ignore(1);
             ss >> x;
-            ss.ignore(1); // Ignore the semicolon
+            ss.ignore(1);
             ss >> y;
-            ss.ignore(1); // Ignore the semicolon
+            ss.ignore(1);
             ss >> direction;
-            ss.ignore(1); // Ignore the semicolon
+            ss.ignore(1);
             ss >> size;
             Bug* crawler = new Crawler(id, x, y*-1, direction, size);
             bugsVector.push_back(crawler); // Add the address of the object to the vector
@@ -55,15 +55,15 @@ int main() {
         else if (letter == 'H'){
             ss.ignore(1); // Ignore the semicolon
             ss >> id;
-            ss.ignore(1); // Ignore the semicolon
+            ss.ignore(1);
             ss >> x;
-            ss.ignore(1); // Ignore the semicolon
+            ss.ignore(1);
             ss >> y;
-            ss.ignore(1); // Ignore the semicolon
+            ss.ignore(1);
             ss >> direction;
-            ss.ignore(1); // Ignore the semicolon
+            ss.ignore(1);
             ss >> size;
-            ss.ignore(1); // Ignore the semicolon
+            ss.ignore(1);
             ss >> hopLength;
             Bug* hopper = new Hopper(id, x, y*-1, direction, size, hopLength);
             bugsVector.push_back(hopper); // Add the address of the object to the vector
@@ -74,9 +74,9 @@ int main() {
     tapBoard(bugsVector);
     tapBoard(bugsVector);
     tapBoard(bugsVector);
-    displayLifeHistory(bugsVector);
+    //displayLifeHistory(bugsVector);
     Exit(bugsVector);
-    DisplayAllCells(bugsVector);
+    //DisplayAllCells(bugsVector);
 
     // Free the memory allocated for the bug objects
     for (Bug* bug : bugsVector) {
@@ -146,12 +146,7 @@ int Exit(vector<Bug*> const &v){
 
     list<pair<int, int>>::iterator iter; // iterator for the path list
     for (Bug* bug : v) { // run through all the bugs in the vector
-        if (Crawler* crawler = dynamic_cast<Crawler*>(bug)) { // if the downcasted pointer bug is safely of type Crawler
-            file << bug->getID() << " Crawler Path: ";
-        }
-        else if (Hopper* hopper = dynamic_cast<Hopper*>(bug)) { // if the downcasted pointer bug is safely of type Hopper
-            file << bug->getID() << " Hopper Path: ";
-        }
+        file << bug->getID() << " " << bug->getName() << " Path: ";
         // iterate through this bug's list called 'path'
         for (const auto& pair : bug->getPath()){
             file << "(" << pair.first << ", " << pair.second << "), "; // print each int from the pair seperately
@@ -164,8 +159,8 @@ int Exit(vector<Bug*> const &v){
 void DisplayAllCells(vector<Bug*> const &v){
     int x;
     int y;
-    for (x = 0; x <= 9; x++){ // for each x position
-        for (y = 0; y >= -9; y--){ // for each y position
+    for (x = 0; x <= 9; x++){ // for each x position - increment 0,1,2,3,4 etc.
+        for (y = 0; y >= -9; y--){ // for each y position - increment 0,-1,-2,-3,-4 etc.
             bool isEmpty = true;
             cout << "(" << x << "," << y << "): ";
             for (Bug* bug : v) { // for each bug
