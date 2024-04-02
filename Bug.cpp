@@ -14,8 +14,15 @@ bool Bug::isWayBlocked(){
     if (x == 0 && direction == 4){ // if we're on the very left column and facing left
         return true; // we are blocked
     }
-    if (x == 9 && direction == 2){
+    else if (x == 9 && direction == 2){
         return true;
     }
+    else if (y == 0 && direction == 1){
+        return true;
+    }
+    else if (y == 9 && direction == 3){
+        return true;
+    }
+    // otherwise, we're not blocked so return false
     return false;
 }
