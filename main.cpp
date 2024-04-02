@@ -11,6 +11,8 @@
 
 using namespace std;
 
+void findBugByID();
+
 int main() {
     vector<Bug*> bugsVector; // vector of pointer Bugs, so it can point at all derived objects (Hopper, Crawler)
     ifstream file("../bugs.txt"); // open file to read from it
@@ -66,10 +68,16 @@ int main() {
         bug->printBug();
     }
 
+
+
     // Free the memory allocated for the bug objects
     for (Bug* bug : bugsVector) {
         delete bug;
     }
 
     return 0;
+}
+
+void findBugByID(){
+
 }

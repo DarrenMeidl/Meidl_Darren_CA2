@@ -54,8 +54,16 @@ void Hopper::move() {
 }
 
 void Hopper::printBug() const {
-    cout << "Type: Hopper" << endl;
-    Bug::printBug(); // call bug base class print function
-    cout << "Hop Length: " << hopLength << endl;
-    cout << "" << endl;
+    string dir; // set the dir string based on direction value
+    if (direction == 1)
+        dir = "North";
+    else if (direction == 2)
+        dir = "East";
+    else if (direction == 3)
+        dir = "South";
+    else if (direction == 4)
+        dir = "West";
+    // Print the values
+    cout << id << " Hopper " << "(" << position.first << ", " << position.second << ") "
+    << size << " " << dir << " " << hopLength << " " << (alive ? "Alive" : "Dead") << endl;
 }
