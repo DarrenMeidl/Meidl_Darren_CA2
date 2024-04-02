@@ -22,6 +22,7 @@ public:
             : id(id), position(std::make_pair(x, y)), direction(direction), size(size), alive(true) {} // implement these variables, (alive is true by default)
     virtual void move() = 0; // ensures this Bug class is an abstract base class by having 1 pure virtual function
     bool isWayBlocked();
+    virtual void printBug() const;
 };
 
 

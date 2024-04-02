@@ -3,10 +3,10 @@
 //
 #include <random>
 #include "Crawler.h"
+using namespace std;
 
-
-std::random_device rd; // Create random number generator called rd
-std::mt19937 gen(rd()); // Seed the generator with a random device 'rd'
+random_device rd; // Create random number generator called rd
+mt19937 crawler_gen(rd()); // Seed the generator with a random device 'rd'
 
 
 void Crawler::move() {
@@ -15,7 +15,7 @@ void Crawler::move() {
     // while we are blocked at the edge of the board
     while (isWayBlocked() && tries < max){
         std::uniform_int_distribution<> dis(1, 4); // declare random integer between 1-4
-        direction = dis(gen); //set direction to that random integer
+        direction = dis(crawler_gen); //set direction to that random integer
         tries++; // increment attempts
     }
     // If we're not blocked
@@ -40,4 +40,8 @@ void Crawler::move() {
     // if crawler couldn't find a way to move, then it simply stays in the same position
     // add current position as a pair to the path list (emplace_back is cleaner looking than "push_back(std::make_pair...."
     path.emplace_back(position.first, position.second);
+}
+void Crawler::printBug() const {
+    cout << "Type: Crawler" << endl;
+    Bug::printBug(); // call bug base class print function
 }

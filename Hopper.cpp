@@ -3,9 +3,10 @@
 //
 #include <random>
 #include "Hopper.h"
+using namespace std;
 
-std::random_device rd; // Create random number generator called rd
-std::mt19937 gen(rd()); // Seed the generator with a random device 'rd'
+random_device rd; // Create random number generator called rd
+mt19937 hopper_gen(rd()); // Seed the generator with a random device 'rd'
 
 void Hopper::move() {
     int tries = 0;
@@ -15,7 +16,7 @@ void Hopper::move() {
     // while we are blocked at the edge of the board before we've started moving
     while (isWayBlocked() && tries < max){
         std::uniform_int_distribution<> dis(1, 4); // declare random integer between 1-4
-        direction = dis(gen); //set direction to that random integer
+        direction = dis(hopper_gen); //set direction to that random integer
         tries++; // increment attempts
     }
     // if we're still blocked after 100 attempts before we've started moving, then save our position & end the function early
@@ -50,4 +51,9 @@ void Hopper::move() {
     std::cout << "Hopper " << id << " ended movement with HOPCOUNT: " << hopCount << " and HOPLENGTH" << hopLength << std::endl;
     // add current position as a pair to the path list (emplace_back is cleaner looking than "push_back(std::make_pair...."
     path.emplace_back(position.first, position.second);
+}
+
+void Hopper::printBug() const {
+    cout << "Type: Hopper" << endl;
+    Bug::printBug(); // call bug base class print function
 }

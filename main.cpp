@@ -39,7 +39,10 @@ int main() {
         }
 
     }
-    // print the vector
+    // print the bug objects from the vector of bugs
+    for (Bug* bug : bugsVector){
+        bug->printBug();
+    }
 
     // Free the memory allocated for the bug objects
     for (Bug* bug : bugsVector) {

@@ -4,6 +4,7 @@
 
 #include "Bug.h"
 // Constructor already implemented in header file
+using namespace std;
 
 bool Bug::isWayBlocked(){
     // Get current bug position
@@ -25,4 +26,11 @@ bool Bug::isWayBlocked(){
     }
     // otherwise, we're not blocked so return false
     return false;
+}
+void Bug::printBug() const {
+    cout << "ID: " << id << endl;
+    cout << "Position: (" << position.first << ", " << position.second << ")" << endl;
+    cout << "Direction: " << direction << endl;
+    cout << "Size: " << size << endl;
+    cout << "Alive State: " << boolalpha << alive << endl;
 }

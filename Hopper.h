@@ -14,6 +14,7 @@ public: // allows the function to be accessible from outside the class hierarchy
     Hopper(int id, int x, int y, int direction, int size, int hopLength)
             : Bug(id, x, y, direction, size), hopLength(hopLength) {}
     void move() override; // Override the pure virtual function from the base class
+    virtual void printBug() const override;
 };
 
 
