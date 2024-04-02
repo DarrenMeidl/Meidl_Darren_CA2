@@ -32,6 +32,10 @@ int main() {
             Bug* crawler = new Crawler(id, x, y, direction, size);
             bugsVector.push_back(crawler); // Add the address of the object to the vector
         }
+        else if (letter == 'H'){
+            Bug* hopper = new Hopper(id, x, y, direction, size);
+            bugsVector.push_back(hopper); // Add the address of the object to the vector
+        }
 
     }
 
