@@ -119,10 +119,10 @@ void tapBoard(vector<Bug*> const &v){
 void displayLifeHistory(vector<Bug*> const &v){
     list<pair<int, int>>::iterator iter; // iterator for the path list
     for (Bug* bug : v) { // run through all the bugs in the vector
-        if (Crawler* crawler = dynamic_cast<Crawler*>(bug)) { // if the bug being pointed to is of type Crawler
+        if (Crawler* crawler = dynamic_cast<Crawler*>(bug)) { // if the downcasted pointer bug is safely of type Crawler
             cout << bug->getID() << " Crawler Path: ";
         }
-        else if (Hopper* hopper = dynamic_cast<Hopper*>(bug)) { // if the bug being pointed to is of type Hopper
+        else if (Hopper* hopper = dynamic_cast<Hopper*>(bug)) { // if the downcasted pointer bug is safely of type Hopper
             cout << bug->getID() << " Hopper Path: ";
         }
         // iterate through this bug's list called 'path'
