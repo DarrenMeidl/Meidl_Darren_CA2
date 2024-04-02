@@ -8,6 +8,7 @@
 #include <sstream>
 #include "Crawler.h"
 #include "Hopper.h"
+#include <ostream>
 
 using namespace std;
 
@@ -16,14 +17,14 @@ void printAllBugs(vector<Bug*> const &v);
 void findBugByID(vector<Bug*> const &v);
 void tapBoard(vector<Bug*> const &v);
 void displayLifeHistory(vector<Bug*> const &v);
-
+int Exit(vector<Bug*> const &v);
 
 int main() {
     vector<Bug*> bugsVector; // vector of pointer Bugs, so it can point at all derived objects (Hopper, Crawler)
     ifstream file("../bugs.txt"); // open file to read from it
     if (!file.is_open()){
         cout << "CAN'T OPEN FILE" << endl;
-        return 69;
+        return -1;
     }
 
     string line;
@@ -73,6 +74,7 @@ int main() {
     tapBoard(bugsVector);
     tapBoard(bugsVector);
     displayLifeHistory(bugsVector);
+    Exit(bugsVector);
 
     // Free the memory allocated for the bug objects
     for (Bug* bug : bugsVector) {
@@ -131,4 +133,28 @@ void displayLifeHistory(vector<Bug*> const &v){
         }
         cout << (bug->getAlive() ? "Alive!" : "Eaten.") << endl;
     }
+}
+
+int Exit(vector<Bug*> const &v){
+    ofstream file("../bugs_life_history_date_time.out"); // open file
+    if (!file.is_open()){ // check if it can be opened
+        cout << "CAN'T OPEN FILE" << endl;
+        return -1;
+    }
+
+    list<pair<int, int>>::iterator iter; // iterator for the path list
+    for (Bug* bug : v) { // run through all the bugs in the vector
+        if (Crawler* crawler = dynamic_cast<Crawler*>(bug)) { // if the downcasted pointer bug is safely of type Crawler
+            file << bug->getID() << " Crawler Path: ";
+        }
+        else if (Hopper* hopper = dynamic_cast<Hopper*>(bug)) { // if the downcasted pointer bug is safely of type Hopper
+            file << bug->getID() << " Hopper Path: ";
+        }
+        // iterate through this bug's list called 'path'
+        for (const auto& pair : bug->getPath()){
+            file << "(" << pair.first << ", " << pair.second << "), "; // print each int from the pair seperately
+        }
+        file << (bug->getAlive() ? "Alive!" : "Eaten.") << endl;
+    }
+    return 1;
 }
