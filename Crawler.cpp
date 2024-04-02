@@ -52,7 +52,7 @@ void Crawler::printBug() const {
     else if (direction == 4)
         dir = "West";
     // Print the values
-    cout << id << " Crawler " << "(" << position.first << ", " << position.second << ") "
+    cout << id << " " << name << " " << "(" << position.first << ", " << position.second << ") "
          << size << " " << dir << " " << (alive ? "Alive" : "Dead") << endl;
 }
 string Crawler::getName() {

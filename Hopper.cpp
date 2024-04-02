@@ -67,7 +67,7 @@ void Hopper::printBug() const {
     else if (direction == 4)
         dir = "West";
     // Print the values
-    cout << id << " Hopper " << "(" << position.first << ", " << position.second << ") "
+    cout << id << " " << name << " " << "(" << position.first << ", " << position.second << ") "
     << size << " " << dir << " " << hopLength << " " << (alive ? "Alive" : "Dead") << endl;
 }
 
