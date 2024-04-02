@@ -7,7 +7,8 @@
 #include "Bug.h" // ensures this derived class properly inherits base class
 
 class Crawler : protected Bug {
-
+public: // allows the function to be accessible from outside the class hierarchy
+    void move() override; // Override the pure virtual function from the base class
 };
 
 
