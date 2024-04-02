@@ -18,6 +18,7 @@ void findBugByID(vector<Bug*> const &v);
 void tapBoard(vector<Bug*> const &v);
 void displayLifeHistory(vector<Bug*> const &v);
 int Exit(vector<Bug*> const &v);
+void DisplayAllCells(vector<Bug*> const &v);
 
 int main() {
     vector<Bug*> bugsVector; // vector of pointer Bugs, so it can point at all derived objects (Hopper, Crawler)
@@ -75,6 +76,7 @@ int main() {
     tapBoard(bugsVector);
     displayLifeHistory(bugsVector);
     Exit(bugsVector);
+    DisplayAllCells(bugsVector);
 
     // Free the memory allocated for the bug objects
     for (Bug* bug : bugsVector) {
@@ -157,4 +159,33 @@ int Exit(vector<Bug*> const &v){
         file << (bug->getAlive() ? "Alive!" : "Eaten.") << endl;
     }
     return 1;
+}
+
+void DisplayAllCells(vector<Bug*> const &v){
+    int x;
+    int y;
+    for (x = 0; x <= 9; x++){ // for each x position
+        for (y = 0; y >= -9; y--){ // for each y position
+            cout << "(" << x << "," << y << "): ";
+            for (Bug* bug : v) { // for each bug
+                // get this bug's position pair
+                //if this bug's position.first == x & .second == y
+                    // if it's a crawler
+                    if (Crawler* crawler = dynamic_cast<Crawler*>(bug)) { // if the downcasted pointer bug is safely of type Crawler
+                        cout << "Crawler " << bug->getID();
+                    }
+                    // if it's a hopper
+                    else if (Hopper* hopper = dynamic_cast<Hopper*>(bug)) { // if the downcasted pointer bug is safely of type Hopper
+                        cout << "Hopper " << bug->getID();
+                    }
+                else {
+                    cout << "empty" << endl;
+                }
+            }
+
+        }
+    }
+    for (Bug* bug : v){
+
+    }
 }
