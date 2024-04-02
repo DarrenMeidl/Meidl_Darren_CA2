@@ -31,3 +31,11 @@ bool Bug::isWayBlocked(){
 int Bug::getID() {
     return id;
 }
+
+list<pair<int, int>> Bug::getPath(){
+    return path;
+}
+
+int Bug::getAlive() {
+    return alive;
+}

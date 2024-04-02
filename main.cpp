@@ -11,9 +11,12 @@
 
 using namespace std;
 
-void printAllBugs(vector<Bug*> const v); // we don't want to change anything when printing
-void findBugByID(vector<Bug*> const v); // we don't want to change anything when looking for id
-void tapBoard(vector<Bug*> const &v); // pass by reference
+// Declaring functions
+void printAllBugs(vector<Bug*> const &v);
+void findBugByID(vector<Bug*> const &v);
+void tapBoard(vector<Bug*> const &v);
+void displayLifeHistory(vector<Bug*> const &v);
+
 
 int main() {
     vector<Bug*> bugsVector; // vector of pointer Bugs, so it can point at all derived objects (Hopper, Crawler)
@@ -65,11 +68,11 @@ int main() {
         }
 
     }
-
     printAllBugs(bugsVector);
-    findBugByID(bugsVector);
     tapBoard(bugsVector);
-    printAllBugs(bugsVector);
+    tapBoard(bugsVector);
+    tapBoard(bugsVector);
+    displayLifeHistory(bugsVector);
 
     // Free the memory allocated for the bug objects
     for (Bug* bug : bugsVector) {
@@ -78,14 +81,16 @@ int main() {
 
     return 0;
 }
-void printAllBugs(vector<Bug*> const v){
+
+// Custom functions
+void printAllBugs(vector<Bug*> const &v){
     // print the bug objects from the vector of bugs
     for (Bug* bug : v){
         bug->printBug();
     }
 }
 
-void findBugByID(vector<Bug*> const v){
+void findBugByID(vector<Bug*> const &v){
     bool foundBug = false;
     int userInput; // get user to input an id integer
     cout << "Enter a bug's ID: ";
@@ -108,5 +113,22 @@ void tapBoard(vector<Bug*> const &v){
         cout << "***AFTER MOVE***" << endl;
         bug->printBug();
         cout << "" << endl;
+    }
+}
+
+void displayLifeHistory(vector<Bug*> const &v){
+    list<pair<int, int>>::iterator iter; // iterator for the path list
+    for (Bug* bug : v) { // run through all the bugs in the vector
+        if (Crawler* crawler = dynamic_cast<Crawler*>(bug)) { // if the bug being pointed to is of type Crawler
+            cout << bug->getID() << " Crawler Path: ";
+        }
+        else if (Hopper* hopper = dynamic_cast<Hopper*>(bug)) { // if the bug being pointed to is of type Hopper
+            cout << bug->getID() << " Hopper Path: ";
+        }
+        // iterate through this bug's list called 'path'
+        for (const auto& pair : bug->getPath()){
+            cout << "(" << pair.first << ", " << pair.second << "), "; // print each int from the pair seperately
+        }
+        cout << (bug->getAlive() ? "Alive!" : "Eaten.") << endl;
     }
 }

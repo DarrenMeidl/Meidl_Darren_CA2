@@ -7,23 +7,26 @@
 #ifndef MEIDL_DARREN_CA2_BUG_H
 #define MEIDL_DARREN_CA2_BUG_H
 
+using namespace std;
 
 class Bug {
 protected: // variables declared as protected (only this class & derived classes can access these)
     int id;
-    std::pair<int, int> position;
+    pair<int, int> position;
     int direction;
     int size;
     bool alive;
-    std::list<std::pair<int, int>> path;
+    list<pair<int, int>> path;
 public:
     // Constructor takes in an x & y ints but implements them as a pair
     Bug(int id, int x, int y, int direction, int size)
-            : id(id), position(std::make_pair(x, y)), direction(direction), size(size), alive(true) {} // implement these variables, (alive is true by default)
+            : id(id), position(make_pair(x, y)), direction(direction), size(size), alive(true) {} // implement these variables, (alive is true by default)
     virtual void move() = 0; // ensures this Bug class is an abstract base class by having 1 pure virtual function
     bool isWayBlocked();
     virtual void printBug() const = 0;
     int getID(); // used for find by id function
+    list<pair<int, int>> getPath();
+    int getAlive(); // used in display life history function
 };
 
 
