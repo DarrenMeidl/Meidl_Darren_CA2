@@ -9,16 +9,17 @@
 
 
 class Bug {
-protected: // everything below declared as protected (only this class & derived classes can access these)
+protected: // variables declared as protected (only this class & derived classes can access these)
     int id;
     std::pair<int, int> position;
     int direction;
     int size;
     bool alive;
     std::list<std::pair<int, int>> path;
-    // Set all default values to 0 if no arguments provided
-    Bug(int id = 0, const std::pair<int, int>& position = std::make_pair(0, 0), int direction = 0, int size = 0, bool alive = false)
-            : id(id), position(position), direction(direction), size(size), alive(alive) {} // implement these variables
+public:
+    // Constructor takes in an x & y ints but implements them as a pair
+    Bug(int id, int x, int y, int direction, int size)
+            : id(id), position(std::make_pair(x, y)), direction(direction), size(size), alive(true) {} // implement these variables, (alive is true by default)
     virtual void move() = 0; // ensures this Bug class is an abstract base class by having 1 pure virtual function
     bool isWayBlocked();
 };
