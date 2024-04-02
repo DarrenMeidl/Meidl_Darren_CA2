@@ -7,8 +7,10 @@
 #include "Bug.h" // ensures this derived class properly inherits base class
 
 class Hopper : protected Bug {
+private:
+    int hopLength;
 public: // allows the function to be accessible from outside the class hierarchy
-
+    void move() override; // Override the pure virtual function from the base class
 };
 
 

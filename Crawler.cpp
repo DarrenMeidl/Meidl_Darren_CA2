@@ -6,7 +6,7 @@
 
 
 std::random_device rd; // Create random number generator called rd
-std::mt19937 gen(rd()); // Seed the generator with a random device
+std::mt19937 gen(rd()); // Seed the generator with a random device 'rd'
 
 
 void Crawler::move() {
