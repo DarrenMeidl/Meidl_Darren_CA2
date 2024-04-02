@@ -74,9 +74,9 @@ int main() {
     tapBoard(bugsVector);
     tapBoard(bugsVector);
     tapBoard(bugsVector);
-    //displayLifeHistory(bugsVector);
+    displayLifeHistory(bugsVector);
     Exit(bugsVector);
-    //DisplayAllCells(bugsVector);
+    DisplayAllCells(bugsVector);
 
     // Free the memory allocated for the bug objects
     for (Bug* bug : bugsVector) {
@@ -123,12 +123,7 @@ void tapBoard(vector<Bug*> &v){
 void displayLifeHistory(vector<Bug*> const &v){
     list<pair<int, int>>::iterator iter; // iterator for the path list
     for (Bug* bug : v) { // run through all the bugs in the vector
-        if (Crawler* crawler = dynamic_cast<Crawler*>(bug)) { // if the downcasted pointer bug is safely of type Crawler
-            cout << bug->getID() << " Crawler Path: ";
-        }
-        else if (Hopper* hopper = dynamic_cast<Hopper*>(bug)) { // if the downcasted pointer bug is safely of type Hopper
-            cout << bug->getID() << " Hopper Path: ";
-        }
+        cout << bug->getID() << " " << bug->getName() << " Path: "; // print id & name
         // iterate through this bug's list called 'path'
         for (const auto& pair : bug->getPath()){
             cout << "(" << pair.first << ", " << pair.second << "), "; // print each int from the pair seperately
@@ -146,7 +141,7 @@ int Exit(vector<Bug*> const &v){
 
     list<pair<int, int>>::iterator iter; // iterator for the path list
     for (Bug* bug : v) { // run through all the bugs in the vector
-        file << bug->getID() << " " << bug->getName() << " Path: ";
+        file << bug->getID() << " " << bug->getName() << " Path: "; // print id & name
         // iterate through this bug's list called 'path'
         for (const auto& pair : bug->getPath()){
             file << "(" << pair.first << ", " << pair.second << "), "; // print each int from the pair seperately
@@ -166,20 +161,13 @@ void DisplayAllCells(vector<Bug*> const &v){
             for (Bug* bug : v) { // for each bug
                 //if this bug's position.first == x & .second == y
                 if (bug->getPair().first == x && bug->getPair().second == y){
-                    isEmpty = false;
-                    // if it's a crawler
-                    if (Crawler* crawler = dynamic_cast<Crawler*>(bug)) { // if the downcasted pointer bug is safely of type Crawler
-                        cout << "Crawler " << bug->getID() << " ";
-                    }
-                    // if it's a hopper
-                    else if (Hopper* hopper = dynamic_cast<Hopper*>(bug)) { // if the downcasted pointer bug is safely of type Hopper
-                        cout << "Hopper " << bug->getID() << " ";
-                    }
+                    isEmpty = false; // we found at least 1 bug
+                    cout << bug->getName() << " " << bug->getID() << " "; // print name & id
                 }
             }
             if (isEmpty){ // by the end of the for loop, if it's still empty
                 cout << "empty" << endl; // print empty
-            } else{
+            } else{ // otherwise
                 cout << endl; // end the current line
             }
         }
