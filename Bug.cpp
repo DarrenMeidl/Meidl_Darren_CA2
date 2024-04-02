@@ -32,5 +32,5 @@ void Bug::printBug() const {
     cout << "Position: (" << position.first << ", " << position.second << ")" << endl;
     cout << "Direction: " << direction << endl;
     cout << "Size: " << size << endl;
-    cout << "Alive State: " << boolalpha << alive << endl;
+    cout << "Alive State: " << alive << endl;
 }

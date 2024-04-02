@@ -5,8 +5,8 @@
 #include "Crawler.h"
 using namespace std;
 
-random_device rd; // Create random number generator called rd
-mt19937 crawler_gen(rd()); // Seed the generator with a random device 'rd'
+random_device crawler_rd; // Create random number generator called crawler_rd
+mt19937 crawler_gen(crawler_rd()); // Seed the generator with a random device
 
 
 void Crawler::move() {
@@ -44,4 +44,5 @@ void Crawler::move() {
 void Crawler::printBug() const {
     cout << "Type: Crawler" << endl;
     Bug::printBug(); // call bug base class print function
+    cout << "" << endl;
 }

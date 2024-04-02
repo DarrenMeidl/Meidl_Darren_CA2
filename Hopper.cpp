@@ -5,8 +5,8 @@
 #include "Hopper.h"
 using namespace std;
 
-random_device rd; // Create random number generator called rd
-mt19937 hopper_gen(rd()); // Seed the generator with a random device 'rd'
+random_device hopper_rd; // Create random number generator called hopper_rd
+mt19937 hopper_gen(hopper_rd()); // Seed the generator with a random device
 
 void Hopper::move() {
     int tries = 0;
@@ -56,4 +56,6 @@ void Hopper::move() {
 void Hopper::printBug() const {
     cout << "Type: Hopper" << endl;
     Bug::printBug(); // call bug base class print function
+    cout << "Hop Length: " << hopLength << endl;
+    cout << "" << endl;
 }
