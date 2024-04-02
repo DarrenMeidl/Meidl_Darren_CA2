@@ -5,7 +5,9 @@ set(CMAKE_CXX_STANDARD 17)
 
 add_executable(Meidl_Darren_CA2 main.cpp
         Bug.cpp
-        Bug.h)
+        Bug.h
+        Crawler.cpp
+        Crawler.h)
 
 set(SFML_STATIC_LIBRARIES TRUE)
 set(SFML_DIR C:/SFML-2.6.1/lib/cmake/SFML)
