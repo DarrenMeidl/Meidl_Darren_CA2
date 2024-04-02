@@ -31,24 +31,27 @@ void Hopper::move() {
         // Begin moving +1 unit in the direction facing
         // 1 = up, 2 = right, 3 = down, 4 = left
         if (direction == 1){ // if facing north
-            position.second += 1; // increment the y integer in the pair by 1 e.g. move +1 upwards while keeping x the same
+            position.second++; // increment the y integer in the pair by 1 e.g. move +1 upwards while keeping x the same
         }
         else if (direction == 2){ // move right
-            position.first += 1;
+            position.first++;
         }
         else if (direction == 3){ // move down
-            position.second -= 1;
+            position.second--;
         }
         else if (direction == 4){ // move left
-            position.first -= 1;
+            position.first--;
         }
         // decrease the hopCount
         hopCount--;
     }
+    // Print message based on if we had hops left or not
+    if (hopCount == 0) // if we didn't
+        cout << "Hopper " << id << " was not interrupted." << endl;
+    else // if we did have hops left
+        cout << "Hopper " << id << " hit a wall and fell over!" << endl;
     // if we've hit an edge again during our movement
     // then the loop ends early & we stay put
-    // print message to show hopcount vs length, if there were no interruptions then hopcount should be 0
-    std::cout << "Hopper " << id << " ended movement with HOPCOUNT: " << hopCount << " and HOPLENGTH" << hopLength << std::endl;
     // add current position as a pair to the path list (emplace_back is cleaner looking than "push_back(std::make_pair...."
     path.emplace_back(position.first, position.second);
 }

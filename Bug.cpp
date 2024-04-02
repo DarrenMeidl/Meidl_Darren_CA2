@@ -21,7 +21,7 @@ bool Bug::isWayBlocked(){
     else if (y == 0 && direction == 1){
         return true;
     }
-    else if (y == 9 && direction == 3){
+    else if (y == -9 && direction == 3){
         return true;
     }
     // otherwise, we're not blocked so return false

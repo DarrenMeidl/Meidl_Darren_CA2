@@ -11,7 +11,9 @@
 
 using namespace std;
 
-void findBugByID(vector<Bug*> const v); // we don't want to change the vector when looking for id
+void printAllBugs(vector<Bug*> const v); // we don't want to change anything when printing
+void findBugByID(vector<Bug*> const v); // we don't want to change anything when looking for id
+void tapBoard(vector<Bug*> const &v); // pass by reference
 
 int main() {
     vector<Bug*> bugsVector; // vector of pointer Bugs, so it can point at all derived objects (Hopper, Crawler)
@@ -41,7 +43,7 @@ int main() {
             ss >> direction;
             ss.ignore(1); // Ignore the semicolon
             ss >> size;
-            Bug* crawler = new Crawler(id, x, y, direction, size);
+            Bug* crawler = new Crawler(id, x, y*-1, direction, size);
             bugsVector.push_back(crawler); // Add the address of the object to the vector
         }
         // If it's a hopper type, create a Crawler object and add it to the bugs vector
@@ -58,17 +60,16 @@ int main() {
             ss >> size;
             ss.ignore(1); // Ignore the semicolon
             ss >> hopLength;
-            Bug* hopper = new Hopper(id, x, y, direction, size, hopLength);
+            Bug* hopper = new Hopper(id, x, y*-1, direction, size, hopLength);
             bugsVector.push_back(hopper); // Add the address of the object to the vector
         }
 
     }
-    // print the bug objects from the vector of bugs
-    for (Bug* bug : bugsVector){
-        bug->printBug();
-    }
 
+    printAllBugs(bugsVector);
     findBugByID(bugsVector);
+    tapBoard(bugsVector);
+    printAllBugs(bugsVector);
 
     // Free the memory allocated for the bug objects
     for (Bug* bug : bugsVector) {
@@ -76,6 +77,12 @@ int main() {
     }
 
     return 0;
+}
+void printAllBugs(vector<Bug*> const v){
+    // print the bug objects from the vector of bugs
+    for (Bug* bug : v){
+        bug->printBug();
+    }
 }
 
 void findBugByID(vector<Bug*> const v){
@@ -91,4 +98,15 @@ void findBugByID(vector<Bug*> const v){
     }
     if (!foundBug) // if we didn't find the bug
         cout << "bug " << userInput << " not found" << endl;
+}
+
+void tapBoard(vector<Bug*> const &v){
+    for (Bug* bug : v){ // run through all the bugs in the vector
+        cout << "***BEFORE MOVE***" << endl;
+        bug->printBug();
+        bug->move(); // move this bug
+        cout << "***AFTER MOVE***" << endl;
+        bug->printBug();
+        cout << "" << endl;
+    }
 }
