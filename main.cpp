@@ -11,7 +11,7 @@
 
 using namespace std;
 
-void findBugByID();
+void findBugByID(vector<Bug*> const v);
 
 int main() {
     vector<Bug*> bugsVector; // vector of pointer Bugs, so it can point at all derived objects (Hopper, Crawler)
@@ -68,7 +68,7 @@ int main() {
         bug->printBug();
     }
 
-
+    findBugByID(bugsVector);
 
     // Free the memory allocated for the bug objects
     for (Bug* bug : bugsVector) {
@@ -78,6 +78,17 @@ int main() {
     return 0;
 }
 
-void findBugByID(){
-
+void findBugByID(vector<Bug*> const v){
+    bool foundBug = false;
+    int userInput;
+    cout << "Enter a bug's ID: ";
+    cin >> userInput;
+    for (Bug* bug : v){
+        if (bug->getID() == userInput){
+            bug->printBug();
+            foundBug = true;
+        }
+    }
+    if (!foundBug)
+        cout << "bug " << userInput << " not found" << endl;
 }

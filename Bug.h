@@ -23,6 +23,7 @@ public:
     virtual void move() = 0; // ensures this Bug class is an abstract base class by having 1 pure virtual function
     bool isWayBlocked();
     virtual void printBug() const = 0;
+    int getID();
 };
 
 

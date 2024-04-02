@@ -27,3 +27,7 @@ bool Bug::isWayBlocked(){
     // otherwise, we're not blocked so return false
     return false;
 }
+
+int Bug::getID() {
+    return id;
+}
