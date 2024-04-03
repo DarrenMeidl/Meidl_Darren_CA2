@@ -22,9 +22,10 @@ public:
     void setCellValue(int row, int col, int value); // set a value of a cell at any position in the board
 
     Board getCopy() const; // returns a copy of the board
-
+    void FreeMemoryAllocated();
     // Main Feautres
     void fillInBugs();
+    void printAllBugs();
 };
 
 

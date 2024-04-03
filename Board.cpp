@@ -20,6 +20,12 @@ using namespace std;
 Board Board::getCopy() const{
     return *this; // return only a copy of the board
 }
+void Board::FreeMemoryAllocated() {
+    // Free the memory allocated for the bug objects
+    for (Bug* bug : bugsVector) {
+        delete bug;
+    }
+}
 // Getters & Setters (Cells)
 int Board::getCellValue(int row, int col) const {
     // Check bounds to ensure row and col are valid before getting cell
@@ -86,5 +92,12 @@ void Board::fillInBugs() {
             bugsVector.push_back(hopper); // Add the address of the object to the vector
         }
 
+    }
+}
+
+void Board::printAllBugs() {
+    // print the bug objects from the vector of bugs
+    for (Bug* bug : bugsVector){
+        bug->printBug();
     }
 }

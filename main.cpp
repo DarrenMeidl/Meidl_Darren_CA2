@@ -14,8 +14,6 @@
 using namespace std;
 
 // Declaring functions
-void fillInBugs(vector<Bug*> &v);
-void printAllBugs(vector<Bug*> const &v);
 void findBugByID(vector<Bug*> const &v);
 void tapBoard(vector<Bug*> &v);
 void displayLifeHistory(vector<Bug*> const &v);
@@ -25,81 +23,14 @@ void DisplayAllCells(vector<Bug*> const &v);
 int main() {
 
 
-    fillInBugs(bugsVector);
-    printAllBugs(bugsVector);
-    tapBoard(bugsVector);
-    tapBoard(bugsVector);
-    tapBoard(bugsVector);
-    displayLifeHistory(bugsVector);
-    Exit(bugsVector);
+
 
     Board board(10, 10);
-    //DisplayAllCells(bugsVector);
-
-    // Free the memory allocated for the bug objects
-    for (Bug* bug : bugsVector) {
-        delete bug;
-    }
+    board.fillInBugs();
+    board.printAllBugs();
+    board.FreeMemoryAllocated();
 
     return 0;
-}
-
-void fillInBugs(vector<Bug*> &bugsVector){
-    ifstream file("../bugs.txt"); // open file to read from it
-    if (!file.is_open()){
-        cout << "CAN'T OPEN FILE" << endl;
-        return;
-    }
-
-    string line;
-    while (getline(file, line)){ // read a line from the file
-
-        char letter;
-        int id, x, y, direction, size, hopLength; // x & y to be added as a pair
-        stringstream ss(line);
-        ss >> letter;
-
-        // If it's a crawler type, create a Crawler object and add it to the bugs vector
-        if (letter == 'C') {
-            ss.ignore(1); // Ignore the semicolon
-            ss >> id;
-            ss.ignore(1);
-            ss >> x;
-            ss.ignore(1);
-            ss >> y;
-            ss.ignore(1);
-            ss >> direction;
-            ss.ignore(1);
-            ss >> size;
-            Bug* crawler = new Crawler(id, x, y*-1, direction, size); // create a pointer of type bug pointing at the new Hopper object
-            bugsVector.push_back(crawler); // Add the address of the object to the vector
-        }
-            // If it's a hopper type, create a Crawler object and add it to the bugs vector
-        else if (letter == 'H'){
-            ss.ignore(1); // Ignore the semicolon
-            ss >> id;
-            ss.ignore(1);
-            ss >> x;
-            ss.ignore(1);
-            ss >> y;
-            ss.ignore(1);
-            ss >> direction;
-            ss.ignore(1);
-            ss >> size;
-            ss.ignore(1);
-            ss >> hopLength;
-            Bug* hopper = new Hopper(id, x, y*-1, direction, size, hopLength); // create a pointer of type bug pointing at the new Hopper object
-            bugsVector.push_back(hopper); // Add the address of the object to the vector
-        }
-
-    }
-}
-
-void printAllBugs(vector<Bug*> const &v){
-    // print the bug objects from the vector of bugs
-    for (Bug* bug : v){
-        bug->printBug();
-    }
 }
 
 void findBugByID(vector<Bug*> const &v){
