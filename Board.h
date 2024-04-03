@@ -17,7 +17,7 @@ private:
     int boardHeight; // save height
     int boardWidth; // save width
 public:
-    // Constructor which allows us to set the dimensions of the board - Each row (x) has a corresponding column/vector (y)
+    // Constructor which allows us to set the dimensions of the board - Each row (x) has a corresponding list columns (y)
     Board(int rows, int cols) : cells(rows, vector<Cell*>(cols)), boardHeight(cols), boardWidth(rows) {}
     // Getters & Setters (Cells)
     int getCellValue(int row, int col) const; // get a value of a cell at any position in the board

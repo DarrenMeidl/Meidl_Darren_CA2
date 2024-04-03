@@ -22,7 +22,7 @@ protected: // variables declared as protected (only this class & derived classes
 public:
     // Constructor takes in an x & y ints but implements them as a pair
     Bug(int id, int x, int y, int direction, int size)
-            : id(id), position(make_pair(x, y)), direction(direction), size(size), alive(true) {} // implement these variables, (alive is true by default)
+            : id(id), position(make_pair(x, y*-1)), direction(direction), size(size), alive(true) {} // implement these variables, (alive is true by default)
     virtual void move() = 0; // ensures this Bug class is an abstract base class by having 1 pure virtual function
     bool isWayBlocked();
     virtual void printBug() const = 0;

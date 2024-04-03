@@ -89,7 +89,7 @@ void Board::fillInBugs() {
             ss >> direction;
             ss.ignore(1);
             ss >> size;
-            Bug* crawler = new Crawler(id, x, y*-1, direction, size); // create a pointer of type bug pointing at the new Hopper object
+            Bug* crawler = new Crawler(id, x, y, direction, size); // create a pointer of type bug pointing at the new Hopper object
             bugsVector.push_back(crawler); // Add the address of the object to the vector
         }
             // If it's a hopper type, create a Crawler object and add it to the bugs vector
@@ -106,7 +106,7 @@ void Board::fillInBugs() {
             ss >> size;
             ss.ignore(1);
             ss >> hopLength;
-            Bug* hopper = new Hopper(id, x, y*-1, direction, size, hopLength); // create a pointer of type bug pointing at the new Hopper object
+            Bug* hopper = new Hopper(id, x, y, direction, size, hopLength); // create a pointer of type bug pointing at the new Hopper object
             bugsVector.push_back(hopper); // Add the address of the object to the vector
         }
 
@@ -177,14 +177,14 @@ void Board::Exit() const {
 }
 
 void Board::displayAllCells() const {
-    for (int x = 0; x < boardWidth; x++){ // for each x position - increment 0,1,2,3,4 etc.
-        for (int y = 0; y < boardHeight; y++){ // for each y position - increment 0,-1,-2,-3,-4 etc.
-            bool isEmpty = true; // assume the cell is empty first
+    for (int x = 0; x < boardWidth; x++){ // for each x position
+        for (int y = 0; y < boardHeight; y++){ // for each y position
+            bool isEmpty = true; // assume the cell is empty unless told otherwise
             cells[x][y]->printPosition(); // print the cell at this position
             cout << ": ";
             for (const Bug* bug : bugsVector) { // for each bug
                 //if this bug's position.first == x & .second == y   i.e. check if it matches this position
-                if (bug->getPair().first == x && bug->getPair().second == y){ // if it does
+                if (bug->getPair().first == x && bug->getPair().second == y*-1){ // if it does (*-1 because while our y's in this loop are positive, the actual bug's y value is negative)
                     isEmpty = false; // this cell is no longer empty
                     cells[x][y]->incrementValue(1); // +1 value since there's 1 bug on this cell, it is no longer empty
                     cout << bug->getName() << " " << bug->getID() << " "; // print name & id of bug

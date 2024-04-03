@@ -18,11 +18,11 @@ int main() {
     // Call the board's functions
     board.fillInBugs();
     board.fillInCells();
-    /*board.tapBoard();
     board.tapBoard();
     board.tapBoard();
     board.tapBoard();
-    board.displayLifeHistory();*/
+    board.tapBoard();
+    board.displayLifeHistory();
     board.displayAllCells();
     board.FreeMemoryAllocated();
 
