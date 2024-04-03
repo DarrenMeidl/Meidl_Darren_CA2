@@ -32,13 +32,13 @@ int Bug::getID() const {
     return id;
 }
 
-list<pair<int, int>> Bug::getPath(){
+list<pair<int, int>> Bug::getPath() const{
     return path;
 }
 
-int Bug::getAlive() {
+int Bug::getAlive() const {
     return alive;
 }
-pair<int, int> Bug::getPair() {
+pair<int, int> Bug::getPair() const{
     return position;
 }

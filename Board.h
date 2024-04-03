@@ -25,12 +25,12 @@ public:
     void FreeMemoryAllocated();
     // Main Feautres - might need this: vector<Bug*> const &v
     void fillInBugs();
-    void printAllBugs();
+    void printAllBugs() const;
     void findBugByID() const;
     void tapBoard();
-    void displayLifeHistory();
-    int Exit();
-    void DisplayAllCells();
+    void displayLifeHistory() const;
+    int Exit() const;
+    void DisplayAllCells() const;
 };
 
 

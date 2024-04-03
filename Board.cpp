@@ -95,9 +95,9 @@ void Board::fillInBugs() {
     }
 }
 
-void Board::printAllBugs() {
+void Board::printAllBugs() const {
     // print the bug objects from the vector of bugs
-    for (Bug* bug : bugsVector){
+    for (const Bug* bug : bugsVector){
         bug->printBug();
     }
 }

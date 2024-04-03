@@ -27,10 +27,10 @@ public:
     bool isWayBlocked();
     virtual void printBug() const = 0;
     int getID() const; // used for find by id function
-    list<pair<int, int>> getPath();
-    int getAlive(); // used in display life history function
-    pair<int, int> getPair();
-    virtual string getName() = 0;
+    list<pair<int, int>> getPath() const;
+    int getAlive() const; // used in display life history function
+    pair<int, int> getPair() const;
+    virtual string getName() const = 0;
 };
 
 

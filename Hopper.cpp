@@ -71,6 +71,6 @@ void Hopper::printBug() const {
     << size << " " << dir << " " << hopLength << " " << (alive ? "Alive" : "Dead") << endl;
 }
 
-string Hopper::getName() {
+string Hopper::getName() const {
     return name;
 }

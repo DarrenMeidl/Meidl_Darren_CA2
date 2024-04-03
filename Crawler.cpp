@@ -55,6 +55,6 @@ void Crawler::printBug() const {
     cout << id << " " << name << " " << "(" << position.first << ", " << position.second << ") "
          << size << " " << dir << " " << (alive ? "Alive" : "Dead") << endl;
 }
-string Crawler::getName() {
+string Crawler::getName() const {
     return name;
 }
