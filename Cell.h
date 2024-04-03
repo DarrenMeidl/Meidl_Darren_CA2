@@ -7,7 +7,12 @@
 
 
 class Cell {
-
+private:
+    int value;
+public:
+    Cell(int val = 0) : value(val) {} // by default all cells are empty
+    int getValue() const;
+    void setValue(int v);
 };
 
 
