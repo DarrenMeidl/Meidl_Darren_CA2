@@ -24,3 +24,6 @@ void Cell::setPosition(int x, int y) {
     position.first = x;
     position.second = y;
 }
+string Cell::getState() const{
+    return state;
+}

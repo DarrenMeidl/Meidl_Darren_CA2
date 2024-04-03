@@ -15,13 +15,14 @@ private:
     pair<int, int> position;
     string state;
 public:
-    Cell( int x = 0, int y = 0, int value = 0) : position(make_pair(x, y)), state("empty"), value(value) {} // by default all cells are empty & start at 0,0
+    Cell( int x = 0, int y = 0, int value = 0) : position(make_pair(x, y*-1)), state("empty"), value(value) {} // by default all cells are empty & start at 0,0
     int getValue() const;
     void setValue(int value);
     void printPosition() const;
     void incrementValue(int amount);
     pair<int, int> getPosition() const;
     void setPosition(int x, int y);
+    string getState() const;
 };
 
 

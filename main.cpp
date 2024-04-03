@@ -17,12 +17,12 @@ int main() {
     Board board(10, 10); // Create a new board
     // Call the board's functions
     board.fillInBugs();
+    board.fillInCells();
+    /*board.tapBoard();
     board.tapBoard();
     board.tapBoard();
     board.tapBoard();
-    board.tapBoard();
-    board.displayLifeHistory();
-    board.Exit();
+    board.displayLifeHistory();*/
     board.displayAllCells();
     board.FreeMemoryAllocated();
 

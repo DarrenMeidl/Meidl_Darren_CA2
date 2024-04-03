@@ -51,8 +51,8 @@ void Board::setCellValue(int row, int col, int value) {
 }
 
 void Board::fillInCells() {
-    for (int x = 0; x <= boardWidth-1; x++) { // for each x position - increment 0,1,2,3,4 etc.
-        for (int y = 0; y >= boardHeight + 1; y--) { // for each y position - increment 0,-1,-2,-3,-4 etc.
+    for (int x = 0; x < boardWidth; x++) { // for each x position - increment 0,1,2,3,4 etc.
+        for (int y = 0; y < boardHeight; y++) { // for each y position - increment 0,-1,-2,-3,-4 etc.
             cells[x][y] = new Cell(x, y, 0); // create new cell with value 0, set it to current x & y
         }
     }
@@ -178,15 +178,20 @@ void Board::Exit() const {
 
 void Board::displayAllCells() const {
     for (int x = 0; x < boardWidth; x++){ // for each x position - increment 0,1,2,3,4 etc.
-        for (int y = 0; y > boardHeight; y--){ // for each y position - increment 0,-1,-2,-3,-4 etc.
+        for (int y = 0; y < boardHeight; y++){ // for each y position - increment 0,-1,-2,-3,-4 etc.
+            bool isEmpty = true; // assume the cell is empty first
             cells[x][y]->printPosition(); // print the cell at this position
             cout << ": ";
             for (const Bug* bug : bugsVector) { // for each bug
                 //if this bug's position.first == x & .second == y   i.e. check if it matches this position
                 if (bug->getPair().first == x && bug->getPair().second == y){ // if it does
+                    isEmpty = false; // this cell is no longer empty
                     cells[x][y]->incrementValue(1); // +1 value since there's 1 bug on this cell, it is no longer empty
                     cout << bug->getName() << " " << bug->getID() << " "; // print name & id of bug
                 }
+            }
+            if (isEmpty){
+                cout << cells[x][y]->getState(); // print the state string "empty"
             }
             cout << endl; // end the current line
         }
