@@ -158,15 +158,15 @@ void Board::Exit() const {
     }
 }
 
-void Board::DisplayAllCells() const {
+void Board::displayAllCells() const {
 
-    /*int x;
+    int x;
     int y;
-    for (x = 0; x <= 9; x++){ // for each x position - increment 0,1,2,3,4 etc.
-        for (y = 0; y >= -9; y--){ // for each y position - increment 0,-1,-2,-3,-4 etc.
+    for (x = 0; x <= boardWidth; x++){ // for each x position - increment 0,1,2,3,4 etc.
+        for (y = 0; y >= boardHeight; y--){ // for each y position - increment 0,-1,-2,-3,-4 etc.
             bool isEmpty = true;
             cout << "(" << x << "," << y << "): ";
-            for (Bug* bug : v) { // for each bug
+            for (const Bug* bug : bugsVector) { // for each bug
                 //if this bug's position.first == x & .second == y
                 if (bug->getPair().first == x && bug->getPair().second == y){
                     isEmpty = false; // we found at least 1 bug
@@ -179,5 +179,5 @@ void Board::DisplayAllCells() const {
                 cout << endl; // end the current line
             }
         }
-    }*/
+    }
 }

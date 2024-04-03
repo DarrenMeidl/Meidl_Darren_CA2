@@ -23,6 +23,7 @@ int main() {
     board.tapBoard();
     board.displayLifeHistory();
     board.Exit();
+    board.displayAllCells();
     board.FreeMemoryAllocated();
 
     return 0;
