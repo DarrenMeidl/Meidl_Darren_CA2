@@ -162,8 +162,8 @@ void Board::displayAllCells() const {
 
     int x;
     int y;
-    for (x = 0; x <= boardWidth; x++){ // for each x position - increment 0,1,2,3,4 etc.
-        for (y = 0; y >= boardHeight; y--){ // for each y position - increment 0,-1,-2,-3,-4 etc.
+    for (x = 0; x <= boardWidth-1; x++){ // for each x position - increment 0,1,2,3,4 etc.
+        for (y = 0; y >= boardHeight+1; y--){ // for each y position - increment 0,-1,-2,-3,-4 etc.
             bool isEmpty = true;
             cout << "(" << x << "," << y << "): ";
             for (const Bug* bug : bugsVector) { // for each bug
