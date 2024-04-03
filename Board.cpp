@@ -26,11 +26,18 @@ void Board::FreeMemoryAllocated() {
         delete bug;
     }
 }
+void Board::FreeCellMemoryAllocated() {
+    for (auto& row : cells) { // go through each row
+        for (auto cell : row) { // go through each cell in row
+            delete cell; // free memory
+        }
+    }
+}
 // Getters & Setters (Cells)
 int Board::getCellValue(int row, int col) const {
     // Check bounds to ensure row and col are valid before getting cell
     if (col >= -9 && col < cells.size() && row >= 0 && row < cells[0].size()){
-        return cells[row][col + 9].getValue(); // since the board uses -y but our cells vector doesn't, we counteract the -9
+        return cells[row][col + 9]->getValue(); // since the board uses -y but our cells vector doesn't, we counteract the -9
     } else{
         return -1; // the cell is out of bounds
     }
@@ -38,11 +45,23 @@ int Board::getCellValue(int row, int col) const {
 void Board::setCellValue(int row, int col, int value) {
     // Check bounds to ensure row and col are valid before setting cell
     if (col >= -9 && col < cells.size() && row >= 0 && row < cells[0].size()) {
-        cells[row][col + 9].setValue(value); // since the board uses -y but our cells vector doesn't, we counteract the -9
+        cells[row][col + 9]->setValue(value); // since the board uses -y but our cells vector doesn't, we counteract the -9
     } else {
         cout << "INVALID CELL POSITION" << endl; // do nothing if out of bounds
     }
 }
+
+void Board::fillInCells() {
+    for (int x = 0; x <= boardWidth-1; x++) { // for each x position - increment 0,1,2,3,4 etc.
+        for (int y = 0; y >= boardHeight + 1; y--) { // for each y position - increment 0,-1,-2,-3,-4 etc.
+            cells[x][y] = new Cell(x, y, 0); // create new cell with value 0, set it to current x & y
+        }
+    }
+}
+
+
+
+
 
 void Board::fillInBugs() {
     ifstream file("../bugs.txt"); // open file to read from it
@@ -94,8 +113,6 @@ void Board::fillInBugs() {
 
     }
 }
-
-//void Board::fillInCells() {}
 
 void Board::printAllBugs() const {
     // print the bug objects from the vector of bugs
