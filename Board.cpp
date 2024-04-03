@@ -181,12 +181,14 @@ void Board::displayAllCells() const {
         for (int y = 0; y < boardHeight; y++){ // for each y position
             bool isEmpty = true; // assume the cell is empty unless told otherwise
             cells[x][y]->printPosition(); // print the cell at this position
+            cells[x][y]->setValue(0);
+            cells[x][y]->setState("empty");
             cout << ": ";
             for (const Bug* bug : bugsVector) { // for each bug
                 //if this bug's position.first == x & .second == y   i.e. check if it matches this position
                 if (bug->getPair().first == x && bug->getPair().second == y*-1){ // if it does (*-1 because while our y's in this loop are positive, the actual bug's y value is negative)
                     isEmpty = false; // this cell is no longer empty
-                    cells[x][y]->incrementValue(1); // +1 value since there's 1 bug on this cell, it is no longer empty
+                    cells[x][y]->incrementValue(1); // +1 value since there's +1 bug on this cell, it is no longer empty
                     cout << bug->getName() << " " << bug->getID() << " "; // print name & id of bug
                 }
             }

@@ -27,3 +27,6 @@ void Cell::setPosition(int x, int y) {
 string Cell::getState() const{
     return state;
 }
+void Cell::setState(string s) {
+    state = s;
+}

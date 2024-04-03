@@ -24,6 +24,9 @@ int main() {
     board.tapBoard();
     board.displayLifeHistory();
     board.displayAllCells();
+    board.tapBoard();
+    board.tapBoard();
+    board.displayAllCells();
     board.FreeMemoryAllocated();
 
     return 0;

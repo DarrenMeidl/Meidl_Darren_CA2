@@ -23,6 +23,7 @@ public:
     pair<int, int> getPosition() const;
     void setPosition(int x, int y);
     string getState() const;
+    void setState(string s);
 };
 
 
