@@ -8,7 +8,7 @@
 
 class Cell {
 private:
-    int value;
+    int value; // value to determine if this cell is empty, used by 1 or more bugs or out of bounds
 public:
     Cell(int val = 0) : value(val) {} // by default all cells are empty
     int getValue() const;
