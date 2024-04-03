@@ -23,9 +23,14 @@ public:
 
     Board getCopy() const; // returns a copy of the board
     void FreeMemoryAllocated();
-    // Main Feautres
+    // Main Feautres - might need this: vector<Bug*> const &v
     void fillInBugs();
     void printAllBugs();
+    void findBugByID() const;
+    void tapBoard();
+    void displayLifeHistory();
+    int Exit();
+    void DisplayAllCells();
 };
 
 

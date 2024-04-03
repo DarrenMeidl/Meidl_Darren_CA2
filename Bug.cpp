@@ -28,7 +28,7 @@ bool Bug::isWayBlocked(){
     return false;
 }
 
-int Bug::getID() {
+int Bug::getID() const {
     return id;
 }
 

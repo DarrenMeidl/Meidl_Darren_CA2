@@ -101,3 +101,18 @@ void Board::printAllBugs() {
         bug->printBug();
     }
 }
+
+void Board::findBugByID() const {
+    bool foundBug = false;
+    int userInput; // get user to input an id integer
+    cout << "Enter a bug's ID: ";
+    cin >> userInput;
+    for (const Bug* bug : bugsVector){ // run through all the bugs in the vector
+        if (bug->getID() == userInput){ // if the bug has the same id
+            bug->printBug(); // print it
+            foundBug = true; // we found the bug
+        }
+    }
+    if (!foundBug) // if we didn't find the bug
+        cout << "bug " << userInput << " not found" << endl;
+}

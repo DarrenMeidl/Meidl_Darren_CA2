@@ -13,39 +13,15 @@
 
 using namespace std;
 
-// Declaring functions
-void findBugByID(vector<Bug*> const &v);
-void tapBoard(vector<Bug*> &v);
-void displayLifeHistory(vector<Bug*> const &v);
-int Exit(vector<Bug*> const &v);
-void DisplayAllCells(vector<Bug*> const &v);
-
 int main() {
-
-
-
-
-    Board board(10, 10);
+    Board board(10, 10); // Create a new board
+    // Call the board's functions
     board.fillInBugs();
     board.printAllBugs();
+    board.findBugByID();
     board.FreeMemoryAllocated();
 
     return 0;
-}
-
-void findBugByID(vector<Bug*> const &v){
-    bool foundBug = false;
-    int userInput; // get user to input an id integer
-    cout << "Enter a bug's ID: ";
-    cin >> userInput;
-    for (Bug* bug : v){ // run through all the bugs in the vector
-        if (bug->getID() == userInput){ // if the bug has the same id
-            bug->printBug(); // print it
-            foundBug = true; // we found the bug
-        }
-    }
-    if (!foundBug) // if we didn't find the bug
-        cout << "bug " << userInput << " not found" << endl;
 }
 
 void tapBoard(vector<Bug*> &v){
