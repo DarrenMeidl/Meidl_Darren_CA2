@@ -29,7 +29,7 @@ public:
     void findBugByID() const;
     void tapBoard();
     void displayLifeHistory() const;
-    int Exit() const;
+    void Exit() const;
     void DisplayAllCells() const;
 };
 
