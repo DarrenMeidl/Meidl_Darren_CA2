@@ -95,6 +95,8 @@ void Board::fillInBugs() {
     }
 }
 
+//void Board::fillInCells() {}
+
 void Board::printAllBugs() const {
     // print the bug objects from the vector of bugs
     for (const Bug* bug : bugsVector){
@@ -165,12 +167,15 @@ void Board::displayAllCells() const {
     for (x = 0; x <= boardWidth-1; x++){ // for each x position - increment 0,1,2,3,4 etc.
         for (y = 0; y >= boardHeight+1; y--){ // for each y position - increment 0,-1,-2,-3,-4 etc.
             bool isEmpty = true;
-            cout << "(" << x << "," << y << "): ";
+            // print the cell
+            cout << ": ";
             for (const Bug* bug : bugsVector) { // for each bug
                 //if this bug's position.first == x & .second == y
                 if (bug->getPair().first == x && bug->getPair().second == y){
                     isEmpty = false; // we found at least 1 bug
-                    cout << bug->getName() << " " << bug->getID() << " "; // print name & id
+                    // print the cell
+                    // increment value of cell by +1 & set state to say nothing
+                    cout << bug->getName() << " " << bug->getID() << " "; // print name & id of bug
                 }
             }
             if (isEmpty){ // by the end of the for loop, if it's still empty

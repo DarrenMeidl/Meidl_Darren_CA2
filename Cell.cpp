@@ -10,3 +10,10 @@ int Cell::getValue() const {
 void Cell::setValue(int value) {
     this->value = value;
 }
+void Cell::printPosition() const {
+    cout << "(" << position.first << ", " << position.second << ")";
+}
+void Cell::incrementValue(const int &amount) {
+    this->value += amount;
+    state = "";
+}
