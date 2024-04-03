@@ -14,6 +14,7 @@
 using namespace std;
 
 // Declaring functions
+void fillInBugs(vector<Bug*> &v);
 void printAllBugs(vector<Bug*> const &v);
 void findBugByID(vector<Bug*> const &v);
 void tapBoard(vector<Bug*> &v);
@@ -23,10 +24,30 @@ void DisplayAllCells(vector<Bug*> const &v);
 
 int main() {
     vector<Bug*> bugsVector; // vector of pointer Bugs, so it can point at all derived objects (Hopper, Crawler)
+    fillInBugs(bugsVector);
+    printAllBugs(bugsVector);
+    tapBoard(bugsVector);
+    tapBoard(bugsVector);
+    tapBoard(bugsVector);
+    displayLifeHistory(bugsVector);
+    Exit(bugsVector);
+
+    Board board(10, 10);
+    //DisplayAllCells(bugsVector);
+
+    // Free the memory allocated for the bug objects
+    for (Bug* bug : bugsVector) {
+        delete bug;
+    }
+
+    return 0;
+}
+
+void fillInBugs(vector<Bug*> &bugsVector){
     ifstream file("../bugs.txt"); // open file to read from it
     if (!file.is_open()){
         cout << "CAN'T OPEN FILE" << endl;
-        return -1;
+        return;
     }
 
     string line;
@@ -52,7 +73,7 @@ int main() {
             Bug* crawler = new Crawler(id, x, y*-1, direction, size);
             bugsVector.push_back(crawler); // Add the address of the object to the vector
         }
-        // If it's a hopper type, create a Crawler object and add it to the bugs vector
+            // If it's a hopper type, create a Crawler object and add it to the bugs vector
         else if (letter == 'H'){
             ss.ignore(1); // Ignore the semicolon
             ss >> id;
@@ -71,25 +92,7 @@ int main() {
         }
 
     }
-
-    printAllBugs(bugsVector);
-    tapBoard(bugsVector);
-    tapBoard(bugsVector);
-    tapBoard(bugsVector);
-    displayLifeHistory(bugsVector);
-    Exit(bugsVector);
-
-    Board board(10, 10);
-    //DisplayAllCells(bugsVector);
-
-    // Free the memory allocated for the bug objects
-    for (Bug* bug : bugsVector) {
-        delete bug;
-    }
-
-    return 0;
 }
-
 // Custom functions
 void printAllBugs(vector<Bug*> const &v){
     // print the bug objects from the vector of bugs
@@ -202,3 +205,4 @@ void DisplayAllCells(Board b, vector<Bug*> const &v){
         }
     }*/
 }
+
