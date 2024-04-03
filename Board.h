@@ -26,7 +26,6 @@ public:
 
     Board getCopy() const; // returns a copy of the board
     void FreeMemoryAllocated();
-    void FreeCellMemoryAllocated();
 
     // Main Features - might need this: vector<Bug*> const &v
     void fillInBugs();

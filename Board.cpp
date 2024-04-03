@@ -25,14 +25,13 @@ void Board::FreeMemoryAllocated() {
     for (Bug* bug : bugsVector) {
         delete bug;
     }
-}
-void Board::FreeCellMemoryAllocated() {
     for (auto& row : cells) { // go through each row
         for (auto cell : row) { // go through each cell in row
             delete cell; // free memory
         }
     }
 }
+
 // Getters & Setters (Cells)
 int Board::getCellValue(int row, int col) const {
     // Check bounds to ensure row and col are valid before getting cell
@@ -62,7 +61,7 @@ void Board::fillInCells() {
 
 
 
-
+// Main features
 void Board::fillInBugs() {
     ifstream file("../bugs.txt"); // open file to read from it
     if (!file.is_open()){
@@ -178,28 +177,18 @@ void Board::Exit() const {
 }
 
 void Board::displayAllCells() const {
-
-    int x;
-    int y;
-    for (x = 0; x <= boardWidth-1; x++){ // for each x position - increment 0,1,2,3,4 etc.
-        for (y = 0; y >= boardHeight+1; y--){ // for each y position - increment 0,-1,-2,-3,-4 etc.
-            bool isEmpty = true;
-            // print the cell
+    for (int x = 0; x < boardWidth; x++){ // for each x position - increment 0,1,2,3,4 etc.
+        for (int y = 0; y > boardHeight; y--){ // for each y position - increment 0,-1,-2,-3,-4 etc.
+            cells[x][y]->printPosition(); // print the cell at this position
             cout << ": ";
             for (const Bug* bug : bugsVector) { // for each bug
-                //if this bug's position.first == x & .second == y
-                if (bug->getPair().first == x && bug->getPair().second == y){
-                    isEmpty = false; // we found at least 1 bug
-                    // print the cell
-                    // increment value of cell by +1 & set state to say nothing
+                //if this bug's position.first == x & .second == y   i.e. check if it matches this position
+                if (bug->getPair().first == x && bug->getPair().second == y){ // if it does
+                    cells[x][y]->incrementValue(1); // +1 value since there's 1 bug on this cell, it is no longer empty
                     cout << bug->getName() << " " << bug->getID() << " "; // print name & id of bug
                 }
             }
-            if (isEmpty){ // by the end of the for loop, if it's still empty
-                cout << "empty" << endl; // print empty
-            } else{ // otherwise
-                cout << endl; // end the current line
-            }
+            cout << endl; // end the current line
         }
     }
 }
