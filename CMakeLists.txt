@@ -9,7 +9,11 @@ add_executable(Meidl_Darren_CA2 main.cpp
         Crawler.cpp
         Crawler.h
         Hopper.cpp
-        Hopper.h)
+        Hopper.h
+        Board.cpp
+        Board.h
+        Cell.cpp
+        Cell.h)
 
 set(SFML_STATIC_LIBRARIES TRUE)
 set(SFML_DIR C:/SFML-2.6.1/lib/cmake/SFML)
