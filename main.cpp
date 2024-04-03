@@ -23,7 +23,8 @@ int Exit(vector<Bug*> const &v);
 void DisplayAllCells(vector<Bug*> const &v);
 
 int main() {
-    vector<Bug*> bugsVector; // vector of pointer Bugs, so it can point at all derived objects (Hopper, Crawler)
+
+
     fillInBugs(bugsVector);
     printAllBugs(bugsVector);
     tapBoard(bugsVector);
@@ -70,7 +71,7 @@ void fillInBugs(vector<Bug*> &bugsVector){
             ss >> direction;
             ss.ignore(1);
             ss >> size;
-            Bug* crawler = new Crawler(id, x, y*-1, direction, size);
+            Bug* crawler = new Crawler(id, x, y*-1, direction, size); // create a pointer of type bug pointing at the new Hopper object
             bugsVector.push_back(crawler); // Add the address of the object to the vector
         }
             // If it's a hopper type, create a Crawler object and add it to the bugs vector
@@ -87,13 +88,13 @@ void fillInBugs(vector<Bug*> &bugsVector){
             ss >> size;
             ss.ignore(1);
             ss >> hopLength;
-            Bug* hopper = new Hopper(id, x, y*-1, direction, size, hopLength);
+            Bug* hopper = new Hopper(id, x, y*-1, direction, size, hopLength); // create a pointer of type bug pointing at the new Hopper object
             bugsVector.push_back(hopper); // Add the address of the object to the vector
         }
 
     }
 }
-// Custom functions
+
 void printAllBugs(vector<Bug*> const &v){
     // print the bug objects from the vector of bugs
     for (Bug* bug : v){
@@ -181,7 +182,7 @@ int Exit(vector<Bug*> const &v){
     }
 }*/
 
-void DisplayAllCells(Board b, vector<Bug*> const &v){
+void DisplayAllCells(vector<Bug*> const &v){
 
 
     /*int x;
