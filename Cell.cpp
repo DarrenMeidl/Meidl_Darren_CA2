@@ -13,7 +13,14 @@ void Cell::setValue(int value) {
 void Cell::printPosition() const {
     cout << "(" << position.first << ", " << position.second << ")";
 }
-void Cell::incrementValue(const int &amount) {
+void Cell::incrementValue(int amount) {
     this->value += amount;
     state = "";
+}
+pair<int, int> Cell::getPosition() const{
+    return position;
+}
+void Cell::setPosition(int x, int y) {
+    position.first = x;
+    position.second = y;
 }

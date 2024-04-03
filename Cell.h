@@ -19,7 +19,9 @@ public:
     int getValue() const;
     void setValue(int value);
     void printPosition() const;
-    void incrementValue(int const &amount);
+    void incrementValue(int amount);
+    pair<int, int> getPosition() const;
+    void setPosition(int x, int y);
 };
 
 
