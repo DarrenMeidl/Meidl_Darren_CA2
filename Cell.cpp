@@ -7,6 +7,6 @@
 int Cell::getValue() const {
     return value;
 }
-void Cell::setValue(int v) {
-    this->value = v;
+void Cell::setValue(int value) {
+    this->value = value;
 }

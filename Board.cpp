@@ -7,6 +7,7 @@ using namespace std;
 #include <iostream>
 
 int Board::getCellValue(int row, int col) const {
+    // Check bounds to ensure row and col are valid before getting cell
     if (col >= -9 && col < cells.size() && row >= 0 && row < cells[0].size()){
         return cells[row][col + 9].getValue(); // since the board uses -y but our cells vector doesn't, we counteract the -9
     } else{
@@ -15,10 +16,14 @@ int Board::getCellValue(int row, int col) const {
 }
 
 void Board::setCellValue(int row, int col, int value) {
-    // Check bounds to ensure row and col are valid
+    // Check bounds to ensure row and col are valid before setting cell
     if (col >= -9 && col < cells.size() && row >= 0 && row < cells[0].size()) {
-        cells[row][col + 9] = Cell(value); // since the board uses -y but our cells vector doesn't, we counteract the -9
+        cells[row][col + 9].setValue(value); // since the board uses -y but our cells vector doesn't, we counteract the -9
     } else {
         cout << "INVALID CELL POSITION" << endl; // do nothing if out of bounds
     }
+}
+
+Board Board::getCopy() const{
+    return *this; // return only a copy of the board
 }

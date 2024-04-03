@@ -9,6 +9,7 @@
 #include "Crawler.h"
 #include "Hopper.h"
 #include <ostream>
+#include "Board.h"
 
 using namespace std;
 
@@ -70,13 +71,16 @@ int main() {
         }
 
     }
+
     printAllBugs(bugsVector);
     tapBoard(bugsVector);
     tapBoard(bugsVector);
     tapBoard(bugsVector);
     displayLifeHistory(bugsVector);
     Exit(bugsVector);
-    DisplayAllCells(bugsVector);
+
+    Board board(10, 10);
+    //DisplayAllCells(bugsVector);
 
     // Free the memory allocated for the bug objects
     for (Bug* bug : bugsVector) {
@@ -150,8 +154,8 @@ int Exit(vector<Bug*> const &v){
     }
     return 1;
 }
-
-void DisplayAllCells(vector<Bug*> const &v){
+// OLD FUNCTION BEFORE BOARD & CELL CLASS
+/*void DisplayAllCells(vector<Bug*> const &v){
     int x;
     int y;
     for (x = 0; x <= 9; x++){ // for each x position - increment 0,1,2,3,4 etc.
@@ -172,4 +176,29 @@ void DisplayAllCells(vector<Bug*> const &v){
             }
         }
     }
+}*/
+
+void DisplayAllCells(Board b, vector<Bug*> const &v){
+
+
+    /*int x;
+    int y;
+    for (x = 0; x <= 9; x++){ // for each x position - increment 0,1,2,3,4 etc.
+        for (y = 0; y >= -9; y--){ // for each y position - increment 0,-1,-2,-3,-4 etc.
+            bool isEmpty = true;
+            cout << "(" << x << "," << y << "): ";
+            for (Bug* bug : v) { // for each bug
+                //if this bug's position.first == x & .second == y
+                if (bug->getPair().first == x && bug->getPair().second == y){
+                    isEmpty = false; // we found at least 1 bug
+                    cout << bug->getName() << " " << bug->getID() << " "; // print name & id
+                }
+            }
+            if (isEmpty){ // by the end of the for loop, if it's still empty
+                cout << "empty" << endl; // print empty
+            } else{ // otherwise
+                cout << endl; // end the current line
+            }
+        }
+    }*/
 }
