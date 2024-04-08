@@ -140,10 +140,19 @@ void Board::tapBoard() {
         cout << "***BEFORE MOVE***" << endl;
         bug->printBug();
         bug->move(); // move this bug
+        // get cell based on this bug's position
+        // get the cell's bug vector
+        // add bug to cell's bug vector
         cout << "***AFTER MOVE***" << endl;
         bug->printBug();
         cout << "" << endl;
     }
+    // run through all the cells in the cells vector
+        // get bugs vector for this cell
+        // if it's size 2 or more
+            // fight/eat code
+        // else
+            // print: none or 1 bug here.
 }
 
 void Board::displayLifeHistory() const {

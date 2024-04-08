@@ -27,6 +27,7 @@ int main() {
     board.tapBoard();
     board.tapBoard();
     board.displayAllCells();
+    board.Exit();
     board.FreeMemoryAllocated();
 
     return 0;
