@@ -6,6 +6,7 @@
 #define MEIDL_DARREN_CA2_CELL_H
 #include <iostream>
 #include <string>
+#include <list>
 
 using namespace std;
 
@@ -14,7 +15,7 @@ private:
     int value; // value to determine if this cell is empty, used by 1 or more bugs or out of bounds
     pair<int, int> position;
     string state;
-    // list of Bug* objects called bugsCellList
+    list<Bug*> bugsCellList; // list of Bug* objects called bugsCellList
 public:
     Cell( int x = 0, int y = 0, int value = 0) : position(make_pair(x, y*-1)), state("empty"), value(value) {} // by default all cells are empty & start at 0,0
     int getValue() const;
