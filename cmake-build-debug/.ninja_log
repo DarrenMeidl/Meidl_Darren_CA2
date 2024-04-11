@@ -1,23 +1,8 @@
 # ninja log v5
 6	703	7338771989576073	CMakeFiles/Meidl_Darren_CA2.dir/Bug.cpp.obj	7872c150306e67a
 24	1047	7338771993026521	CMakeFiles/Meidl_Darren_CA2.dir/Crawler.cpp.obj	502a4aeea558001d
-1129	1334	7338771995852579	Meidl_Darren_CA2.exe	8b7975d19daaedbb
+1232	1827	7342982842079603	Meidl_Darren_CA2.exe	8b7975d19daaedbb
 30	1026	7338771992812972	CMakeFiles/Meidl_Darren_CA2.dir/Hopper.cpp.obj	caf546bd51d4c158
-13	1129	7338771993815304	CMakeFiles/Meidl_Darren_CA2.dir/main.cpp.obj	52bbaabf7140d000
-16	817	7338767604219811	CMakeFiles/Meidl_Darren_CA2.dir/Cell.cpp.obj	df797186019e4172
-36	1058	7338771993121167	CMakeFiles/Meidl_Darren_CA2.dir/Board.cpp.obj	a656f59eb2e937bb
-7	1140	7338772770859765	CMakeFiles/Meidl_Darren_CA2.dir/Board.cpp.obj	a656f59eb2e937bb
-1141	1378	7338772773154394	Meidl_Darren_CA2.exe	8b7975d19daaedbb
-19	1198	7338773460620384	CMakeFiles/Meidl_Darren_CA2.dir/Board.cpp.obj	a656f59eb2e937bb
-9	1289	7338773461541850	CMakeFiles/Meidl_Darren_CA2.dir/main.cpp.obj	52bbaabf7140d000
-1289	1531	7338773463884280	Meidl_Darren_CA2.exe	8b7975d19daaedbb
-20	906	7338777641394148	CMakeFiles/Meidl_Darren_CA2.dir/Cell.cpp.obj	df797186019e4172
-30	1422	7338777646526020	CMakeFiles/Meidl_Darren_CA2.dir/Board.cpp.obj	a656f59eb2e937bb
-7	1488	7338777647205629	CMakeFiles/Meidl_Darren_CA2.dir/main.cpp.obj	52bbaabf7140d000
-1488	1763	7338777649881816	Meidl_Darren_CA2.exe	8b7975d19daaedbb
-8	1436	7338919773562146	CMakeFiles/Meidl_Darren_CA2.dir/main.cpp.obj	52bbaabf7140d000
-1437	1722	7338919776364773	Meidl_Darren_CA2.exe	8b7975d19daaedbb
+6	1232	7342982836155916	CMakeFiles/Meidl_Darren_CA2.dir/main.cpp.obj	52bbaabf7140d000
 41	1016	7342982834009770	CMakeFiles/Meidl_Darren_CA2.dir/Cell.cpp.obj	df797186019e4172
 47	1170	7342982835565183	CMakeFiles/Meidl_Darren_CA2.dir/Board.cpp.obj	a656f59eb2e937bb
-6	1232	7342982836155916	CMakeFiles/Meidl_Darren_CA2.dir/main.cpp.obj	52bbaabf7140d000
-1232	1827	7342982842079603	Meidl_Darren_CA2.exe	8b7975d19daaedbb
