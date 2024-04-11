@@ -31,7 +31,10 @@ void Cell::setState(string s) {
     state = s;
 }
 // addBugById(Bug* b)
-    // add Bug* b to list passed in as a parameter
+    // if Bug* b alive == true
+        // add Bug* b to list passed in as a parameter
+    // else
+        // print error: "Dead bugs can't be added"
 
 // removeBugById(Bug* b)
     // bool foundBug = false;
@@ -45,20 +48,29 @@ void Cell::setState(string s) {
 
 // checkForConflicts()
     // if size of bugsCellList is 2 or more
-        // execute "Fight" code
+        // "Find the largest bug"
         // set Bug* largest to first bug in the bugsCellList
-        // for each Bug* current bugInList in the bugsCellList
+        // create vector<Bug*> largestBugs
+        // add largest to vector
+        // for each Bug* current in the bugsCellList
             // if (current.getSize() > largest.getSize())
                 // largest bug equals the current bug
+                // remove all bugs from vector
+                // add largest to vector
+            // if (current.getSize() == largest.getSize())
+                // add largest to vector
 
-        // "mark all other bugs as dead"
-        // for each Bug* b bugInList in the bugsCellList
-            // check if b is the largestBug, if it is we ignore it
+        // if largestBugs vector isn't empty
+            // Bug* winner = random bug from vector
+
+        // "mark all other bugs as dead, increase winner bug's size"
+        // for each Bug* b in the bugsCellList
+            // check if b == winner, if it is we ignore it         // either compare size or do operator overloading
                 // b.setAlive(false);
-                // largestBug size = largestBug size + b size
+                // winner size = winner size + b size
 
         // clear entire bugsCellList
-        // add largest bug to bugsCellList
+        // add winner bug to bugsCellList
 
     // else
         // print: Only 1 bug on this cell
