@@ -3,6 +3,12 @@
 //
 
 #include "Cell.h"
+#include <vector>
+#include <random>
+
+using namespace std;
+random_device cell_rd; // Create random number generator called cell_rd
+mt19937 cell_gen(cell_rd()); // Seed the generator with a random device
 
 int Cell::getValue() const {
     return value;
@@ -53,24 +59,38 @@ void Cell::removeBug(Bug* b){
     }
 }
 
-// checkForConflicts()
-    // if size of bugsCellList is 2 or more
-        // "Find the largest bug"
-        // set Bug* largest to first bug in the bugsCellList
-        // create vector<Bug*> largestBugs
-        // add largest to vector
-        // for each Bug* current in the bugsCellList
-            // if (current.getSize() > largest.getSize())
-                // largest bug equals the current bug
-                // remove all bugs from vector
-                // add largest to vector
-            // if (current.getSize() == largest.getSize())
-                // add largest to vector
+void Cell::checkForConflicts(){
+    if (bugsCellList.size() >= 2){
+        // "Find largest bug(s)"
+        Bug* largest = bugsCellList.front(); // set largest bug to first bug in the bugsCellList
+        vector<Bug*> largestBugs; // largest bugs vector - so we can easily access elements
+        // Run through all bugs in the cell
+        for (Bug* current : bugsCellList){
+            if (current->getSize() > largest->getSize()){ // if the current bug is bigger
+                largest = current;
+                largestBugs.clear();
+                largestBugs.push_back(largest); // add new largest bug
+            }
+            else if (current->getSize() == largest->getSize()){ // if it's the same size
+                largestBugs.push_back(current); // add the bug without removing existing bugs
+            }
+        }
+        Bug* winner = largest; // set winner to largest bug
+        // "Decide random winner if 2 or more bugs have same size"
+        if (!largestBugs.empty()){ // if the largest bugs vector has 1 or more bugs
+            int randomIndex = rand() % bugsCellList.size(); // always in bounds by ensuring number is between 0 and -1 of vector
+            winner = largestBugs[randomIndex]; // decide a random winner
+        } else{
+            cout << "No largest bugs in vector" << endl;
+        }
+        /*// "mark all other bugs as dead, increase winner bug's size"
+        for (Bug* b : bugsCellList){
+            if (b != winner){
 
-        // if largestBugs vector isn't empty
-            // Bug* winner = random bug from vector
-
-        // "mark all other bugs as dead, increase winner bug's size"
+            }
+        }*/
+    }
+}
         // for each Bug* b in the bugsCellList
             // check if b == winner, if it is we ignore it         // either compare size or do operator overloading
                 // b.setAlive(false);

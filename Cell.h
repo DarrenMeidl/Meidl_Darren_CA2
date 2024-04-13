@@ -32,6 +32,7 @@ public:
     // remove bug from list
     void removeBug(Bug* bug);
     // check for conflicts
+    void checkForConflicts();
 };
 
 
