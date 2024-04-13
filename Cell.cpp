@@ -96,7 +96,4 @@ void Cell::Fight(){
         bugsCellList.clear();
         bugsCellList.push_back(winner);
     }
-    else {
-        cout << "ONLY 1 BUG ON CELL" << endl;
-    }
 }

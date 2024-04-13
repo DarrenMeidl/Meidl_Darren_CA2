@@ -150,7 +150,7 @@ void Board::tapBoard() {
             cout << "***AFTER MOVE***" << endl;
             bug->printBug();
             cout << "" << endl;
-        } else {
+        } else if (!cells[bugX][-bugY]){
             cout << "Invalid cell pointer at position: (" << bugX << ", " << bugY << ")" << endl;
         }
         //cells[bug->getPair().first][bug->getPair().second]->bugsCellList.push_back(bug);
