@@ -7,6 +7,7 @@
 #include <iostream>
 #include <string>
 #include <list>
+#include "Bug.h"
 
 using namespace std;
 
@@ -26,8 +27,9 @@ public:
     void setPosition(int x, int y);
     string getState() const;
     void setState(string s);
-    // add bug by id to list
-    // remove bug by id from list
+    // add bug to list
+    void addBug(Bug* bug);
+    // remove bug from list
     // check for conflicts
 };
 

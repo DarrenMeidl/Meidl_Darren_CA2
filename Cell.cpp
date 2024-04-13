@@ -30,13 +30,16 @@ string Cell::getState() const{
 void Cell::setState(string s) {
     state = s;
 }
-// addBugById(Bug* b)
-    // if Bug* b alive == true
-        // add Bug* b to list passed in as a parameter
-    // else
-        // print error: "Dead bugs can't be added"
-
-// removeBugById(Bug* b)
+void Cell::addBug(Bug* b){
+    // if Bug* b is alive
+    if (b->getAlive() == true){
+        bugsCellList.push_back(b); // add Bug* b to list passed in as a parameter
+    }
+    else{
+        cout << "Dead bugs can't be added" << endl;
+    }
+}
+void Cell::removeBug(Bug* b)
     // bool foundBug = false;
     // for each Bug* bugInList in the bugsCellList
         // if Bug* b id == Bug* bugInList id
