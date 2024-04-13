@@ -32,6 +32,8 @@ public:
     pair<int, int> getPair() const;
     virtual string getName() const = 0;
     int getSize() const;
+    void setAlive(bool a);
+    void setSize(int size);
 };
 
 

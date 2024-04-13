@@ -45,3 +45,9 @@ pair<int, int> Bug::getPair() const{
 int Bug::getSize() const {
     return size;
 }
+void Bug::setAlive(bool a) {
+    this->alive = a;
+}
+void Bug::setSize(int size){
+    this->size = size;
+}
