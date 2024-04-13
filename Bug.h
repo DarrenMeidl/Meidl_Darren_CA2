@@ -18,7 +18,6 @@ protected: // variables declared as protected (only this class & derived classes
     int size;
     bool alive;
     list<pair<int, int>> path;
-    //string name;
 public:
     // Constructor takes in an x & y ints but implements them as a pair
     Bug(int id, int x, int y, int direction, int size)

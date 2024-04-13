@@ -62,6 +62,7 @@ void Board::fillInCells() {
 
 
 // Main features
+// Menu Option 1
 void Board::fillInBugs() {
     ifstream file("../bugs.txt"); // open file to read from it
     if (!file.is_open()){
@@ -112,14 +113,14 @@ void Board::fillInBugs() {
 
     }
 }
-
+// Menu Option 2
 void Board::printAllBugs() const {
     // print the bug objects from the vector of bugs
     for (const Bug* bug : bugsVector){
         bug->printBug();
     }
 }
-
+// Menu Option 3
 void Board::findBugByID() const {
     bool foundBug = false;
     int userInput; // get user to input an id integer
@@ -134,27 +135,35 @@ void Board::findBugByID() const {
     if (!foundBug) // if we didn't find the bug
         cout << "bug " << userInput << " not found" << endl;
 }
-
+// Menu Option 4
 void Board::tapBoard() {
-    for (Bug* bug : bugsVector){ // run through all the bugs in the vector
+    for (Bug* bug : bugsVector){ // run through all the bugs in the bugsVector
         cout << "***BEFORE MOVE***" << endl;
         bug->printBug();
-        bug->move(); // move this bug
-        // get cell based on this bug's position
-        // get the cell's bug vector
-        // add bug to cell's bug vector
-        cout << "***AFTER MOVE***" << endl;
-        bug->printBug();
-        cout << "" << endl;
+        // Get bug position
+        int bugX = bug->getPair().first;
+        int bugY = bug->getPair().second;
+        // add bug to cell's bug vector - the cell at the same position as the bug
+        if (cells[bugX][-bugY] && bug->getAlive() == true) { // Check if cell pointer is valid & alive
+            bug->move(); // move this bug
+            cells[bugX][-bugY]->bugsCellList.push_back(bug);
+            cout << "***AFTER MOVE***" << endl;
+            bug->printBug();
+            cout << "" << endl;
+        } else {
+            cout << "Invalid cell pointer at position: (" << bugX << ", " << bugY << ")" << endl;
+        }
+        //cells[bug->getPair().first][bug->getPair().second]->bugsCellList.push_back(bug);
     }
-    // run through all the cells in the cells vector
-        // get bugs vector for this cell
-        // if it's size 2 or more
-            // fight/eat code
-        // else
-            // print: none or 1 bug here.
+    // Expanding feature 4 (Feature 8 - eat/fight functionality)
+    // run through all cells in the cells vector
+    for (int x = 0; x < boardWidth; x++) { // for each x position - increment 0,1,2,3,4 etc.
+        for (int y = 0; y < boardHeight; y++) { // for each y position - increment 0,-1,-2,-3,-4 etc.
+            cells[x][y]->Fight();
+        }
+    }
 }
-
+// Menu Option 5
 void Board::displayLifeHistory() const {
     list<pair<int, int>>::iterator iter; // iterator for the path list
     for (Bug* bug : bugsVector) { // run through all the bugs in the vector
@@ -166,7 +175,7 @@ void Board::displayLifeHistory() const {
         cout << (bug->getAlive() ? "Alive!" : "Eaten.") << endl;
     }
 }
-
+// Menu Option 6
 void Board::Exit() const {
     ofstream file("../bugs_life_history_date_time.out"); // open file
     if (!file.is_open()){ // check if it can be opened
@@ -184,7 +193,7 @@ void Board::Exit() const {
         file << (bug->getAlive() ? "Alive!" : "Eaten.") << endl;
     }
 }
-
+// Menu Option 7
 void Board::displayAllCells() const {
     for (int x = 0; x < boardWidth; x++){ // for each x position
         for (int y = 0; y < boardHeight; y++){ // for each y position
@@ -196,6 +205,44 @@ void Board::displayAllCells() const {
             for (const Bug* bug : bugsVector) { // for each bug
                 //if this bug's position.first == x & .second == y   i.e. check if it matches this position
                 if (bug->getPair().first == x && bug->getPair().second == y*-1){ // if it does (*-1 because while our y's in this loop are positive, the actual bug's y value is negative)
+                    isEmpty = false; // this cell is no longer empty
+                    cells[x][y]->incrementValue(1); // +1 value since there's +1 bug on this cell, it is no longer empty
+                    cout << bug->getName() << " " << bug->getID() << " "; // print name & id of bug
+                }
+            }
+            if (isEmpty){
+                cout << cells[x][y]->getState(); // print the state string "empty"
+            }
+            cout << endl; // end the current line
+        }
+    }
+}
+
+// Other test functions
+void Board::displayAllCellsLiving() const {
+    for (int x = 0; x < boardWidth; x++){ // for each x position
+        for (int y = 0; y < boardHeight; y++){ // for each y position
+            // Check bounds
+            if (x >= cells.size() || y >= cells[x].size()) {
+                cout << "Invalid cell position: (" << x << ", " << y << ")" << endl;
+                continue;
+            }
+
+            bool isEmpty = true; // assume the cell is empty unless told otherwise
+            cells[x][y]->printPosition(); // print the cell at this position
+            cells[x][y]->setValue(0);
+            cells[x][y]->setState("empty");
+            cout << ": ";
+
+            for (const Bug* bug : bugsVector) { // for each bug
+                // Check if the bug pointer is valid
+                if (!bug) {
+                    cout << "Invalid bug pointer" << endl;
+                    continue;
+                }
+
+                //if this bug's position matches the cell position & is alive
+                if ((bug->getPair().first == x && bug->getPair().second == -y) && (bug->getAlive() == true)){ // if it does (*-1 because while our y's in this loop are positive, the actual bug's y value is negative)
                     isEmpty = false; // this cell is no longer empty
                     cells[x][y]->incrementValue(1); // +1 value since there's +1 bug on this cell, it is no longer empty
                     cout << bug->getName() << " " << bug->getID() << " "; // print name & id of bug

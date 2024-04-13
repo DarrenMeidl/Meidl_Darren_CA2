@@ -35,6 +35,8 @@ public:
     void displayLifeHistory() const;
     void Exit() const;
     void displayAllCells() const;
+
+    void displayAllCellsLiving() const;
 };
 
 

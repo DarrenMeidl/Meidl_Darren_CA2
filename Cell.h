@@ -12,11 +12,11 @@
 using namespace std;
 
 class Cell {
-private:
+public:
+    list<Bug*> bugsCellList; // list of Bug* objects called bugsCellList
     int value; // value to determine if this cell is empty, used by 1 or more bugs or out of bounds
     pair<int, int> position;
     string state;
-    list<Bug*> bugsCellList; // list of Bug* objects called bugsCellList
 public:
     Cell( int x = 0, int y = 0, int value = 0) : position(make_pair(x, y*-1)), state("empty"), value(value) {} // by default all cells are empty & start at 0,0
     int getValue() const;
@@ -32,7 +32,7 @@ public:
     // remove bug from list
     void removeBug(Bug* bug);
     // check for conflicts
-    void checkForConflicts();
+    void Fight();
 };
 
 

@@ -18,15 +18,12 @@ int main() {
     // Call the board's functions
     board.fillInBugs();
     board.fillInCells();
-    board.tapBoard();
-    board.tapBoard();
-    board.tapBoard();
-    board.tapBoard();
+    board.displayAllCellsLiving();
+    for (int i = 0; i < 2; i++){
+        board.tapBoard();
+    }
+    board.displayAllCellsLiving();
     board.displayLifeHistory();
-    board.displayAllCells();
-    board.tapBoard();
-    board.tapBoard();
-    board.displayAllCells();
     board.Exit();
     board.FreeMemoryAllocated();
 

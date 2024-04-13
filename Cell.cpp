@@ -36,6 +36,7 @@ string Cell::getState() const{
 void Cell::setState(string s) {
     state = s;
 }
+
 void Cell::addBug(Bug* b){
     // if Bug* b is alive
     if (b->getAlive() == true){
@@ -59,7 +60,7 @@ void Cell::removeBug(Bug* b){
     }
 }
 
-void Cell::checkForConflicts(){
+void Cell::Fight(){
     if (bugsCellList.size() >= 2){
         // "Find largest bug(s)"
         Bug* largest = bugsCellList.front(); // set largest bug to first bug in the bugsCellList
@@ -77,7 +78,7 @@ void Cell::checkForConflicts(){
         }
         Bug* winner = largest; // set winner to largest bug
         // "Decide random winner if 2 or more bugs have same size"
-        if (!largestBugs.empty()){ // if the largest bugs vector has 1 or more bugs
+        if (largestBugs.size() >= 2){ // if the largest bugs vector has 1 or more bugs
             int randomIndex = rand() % bugsCellList.size(); // always in bounds by ensuring number is between 0 and -1 of vector
             winner = largestBugs[randomIndex]; // decide a random winner
         } else{
@@ -99,13 +100,3 @@ void Cell::checkForConflicts(){
         cout << "ONLY 1 BUG ON CELL" << endl;
     }
 }
-        // for each Bug* b in the bugsCellList
-            // check if b == winner, if it is we ignore it         // either compare size or do operator overloading
-                // b.setAlive(false);
-                // winner size = winner size + b size
-
-        // clear entire bugsCellList
-        // add winner bug to bugsCellList
-
-    // else
-        // print: Only 1 bug on this cell
