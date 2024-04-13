@@ -89,6 +89,9 @@ void Cell::Fight(){
             if (b->getID() != winner->getID()){ // either compare id or do operator overloading
                 b->setAlive(false); // this bug is dead
                 winner->setSize(winner->getSize() + b->getSize()); // add the dead bug's size to the winner's
+                if (winner->getSize() > 20){ // ensures bug size can't exceed 20
+                    winner->setSize(20);
+                }
             }
         }
 
