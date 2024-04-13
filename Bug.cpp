@@ -42,3 +42,6 @@ int Bug::getAlive() const {
 pair<int, int> Bug::getPair() const{
     return position;
 }
+int Bug::getSize() const {
+    return size;
+}

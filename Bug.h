@@ -31,6 +31,7 @@ public:
     int getAlive() const; // used in display life history function
     pair<int, int> getPair() const;
     virtual string getName() const = 0;
+    int getSize() const;
 };
 
 
