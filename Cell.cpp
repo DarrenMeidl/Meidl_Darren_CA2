@@ -36,18 +36,22 @@ void Cell::addBug(Bug* b){
         bugsCellList.push_back(b); // add Bug* b to list passed in as a parameter
     }
     else{
-        cout << "Dead bugs can't be added" << endl;
+        cout << "Dead bugs can't be added" << endl; // print error
     }
 }
-void Cell::removeBug(Bug* b)
-    // bool foundBug = false;
-    // for each Bug* bugInList in the bugsCellList
-        // if Bug* b id == Bug* bugInList id
-            // foundBug = true;
-            // remove Bug* bugInList
-            // return
-    // if (!foundBug)
-        // print error: Bug not in this cell
+void Cell::removeBug(Bug* b){
+    bool foundBug = false;
+    // if the bug we passed in is the same as the bug's id in this list
+    for (Bug* bugInList : bugsCellList){
+        if (b->getID() == bugInList->getID()){
+            foundBug = true;
+            bugsCellList.remove(bugInList); // remove the bug in the list
+        }
+    }
+    if (!foundBug){ // if we never found a matching bug id
+        cout << "Bug not in this cell" << endl; // print error
+    }
+}
 
 // checkForConflicts()
     // if size of bugsCellList is 2 or more

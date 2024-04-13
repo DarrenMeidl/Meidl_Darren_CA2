@@ -30,6 +30,7 @@ public:
     // add bug to list
     void addBug(Bug* bug);
     // remove bug from list
+    void removeBug(Bug* bug);
     // check for conflicts
 };
 
