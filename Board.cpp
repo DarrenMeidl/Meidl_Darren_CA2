@@ -16,6 +16,7 @@ using namespace std;
 #include <sstream>
 #include <fstream>
 #include <ostream>
+#include <ctime>
 
 Board Board::getCopy() const{
     return *this; // return only a copy of the board
@@ -195,6 +196,7 @@ void Board::Exit() const {
         }
         file << (bug->getAlive() ? "Alive!" : "Eaten.") << endl;
     }
+    file.close();
 }
 // Menu Option 7
 void Board::displayAllCells() const {
@@ -283,5 +285,8 @@ void Board::ExitToSimulationFile(ofstream &file) const {
         }
         file << (bug->getAlive() ? "Alive!" : "Eaten.") << endl;
     }
-    file.close();
+}
+void delay(int seconds){
+    clock_t endTime = clock() + seconds * CLOCKS_PER_SEC;
+    while (clock() < endTime);
 }
