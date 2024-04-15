@@ -19,7 +19,7 @@ int main() {
     board.fillInBugs();
     board.fillInCells();
     board.displayLifeHistory();
-    for (int i = 0; i < 10; i++){
+    for (int i = 0; i < 50; i++){
         board.tapBoard();
     }
     board.displayLifeHistory();

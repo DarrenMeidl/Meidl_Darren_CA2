@@ -137,30 +137,29 @@ void Board::findBugByID() const {
 }
 // Menu Option 4
 void Board::tapBoard() {
-    // run through all cells in the cells vector
+    // Expanding feature 4 (Feature 8 - eat/fight functionality)
+    // Clear all bugs on each cell - ensures no bugs from previous rounds remain
     for (int x = 0; x < boardWidth; x++) { // for each x position - increment 0,1,2,3,4 etc.
         for (int y = 0; y < boardHeight; y++) { // for each y position - increment 0,-1,-2,-3,-4 etc.
-            cells[x][y]->bugsCellList.clear(); // clear the previous bugs
+            cells[x][y]->bugsCellList.clear(); // clear the bugs
         }
     }
+    // Move each bug and add to their respective cells
     for (Bug* bug : bugsVector){ // run through all the bugs in the bugsVector
-        cout << "***BEFORE MOVE***" << endl;
-        bug->printBug();
         // add bug to cell's bug vector - the cell at the same position as the bug
-        if (bug->getAlive() == true) { // Check if bug pointer is alive
-            bug->move();
-            // Get bug position
-            int bugX = bug->getPair().first;
-            int bugY = bug->getPair().second;
-            cells[bugX][-bugY]->bugsCellList.push_back(bug);
+        if (bug->getAlive() == true) { // Check if bug pointer is alive, if it's not then it's not allowed to move or be added to the cell
+            cout << "***BEFORE MOVE***" << endl;
+            bug->printBug();
+            bug->move(); // move the bug
+            cells[bug->getPair().first][-bug->getPair().second]->bugsCellList.push_back(bug); // add the bug to the cell, Put minus on the y in this so we change our -y position in the bug back to positive
             cout << "***AFTER MOVE***" << endl;
             bug->printBug();
             cout << "" << endl;
         }
-        //cells[bug->getPair().first][bug->getPair().second]->bugsCellList.push_back(bug);
+
     }
     // Expanding feature 4 (Feature 8 - eat/fight functionality)
-    // run through all cells in the cells vector
+    // Make all bugs on each cell Fight
     for (int x = 0; x < boardWidth; x++) { // for each x position - increment 0,1,2,3,4 etc.
         for (int y = 0; y < boardHeight; y++) { // for each y position - increment 0,-1,-2,-3,-4 etc.
             cells[x][y]->Fight(); // fight the bugs
