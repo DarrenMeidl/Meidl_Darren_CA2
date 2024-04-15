@@ -271,9 +271,10 @@ bool Board::oneBugRemains() const {
     return count <= 1; // if there's only 1 then return true
 }
 void Board::ExitToSimulationFile(string &f) const {
-    // clear file by truncating
+    // truncate the file 'f' if the file can be opened
     ofstream clearFile(f, ofstream::out | ofstream::trunc);
-    clearFile.close();
+    clearFile.close(); // close it to ensure no errors
+    
     ofstream file(f);
     if (!file.is_open()){ // check if it can be opened
         cout << "CAN'T OPEN FILE" << endl;
@@ -291,6 +292,8 @@ void Board::ExitToSimulationFile(string &f) const {
     }
 }
 void Board::delay(int seconds){
+    // adds number of clock ticks since the program started and adds the delay
+    // by converting the seconds into clock ticks
     clock_t endTime = clock() + seconds * CLOCKS_PER_SEC;
-    while (clock() < endTime);
+    while (clock() < endTime); // keeps going until the endTime is bigger than the current processor time
 }

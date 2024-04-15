@@ -17,9 +17,8 @@ void RunSimulation(Board &board);
 
 int main() {
     Board board(10, 10); // Create a new board
+    // Call the board's functions
     RunSimulation(board);
-    board.Exit();
-    board.FreeMemoryAllocated();
 
     return 0;
 }
@@ -36,4 +35,6 @@ void RunSimulation(Board &board){
         board.ExitToSimulationFile(outFile);
         board.delay(1); // pause for a second
     }
+    board.Exit();
+    board.FreeMemoryAllocated();
 }
