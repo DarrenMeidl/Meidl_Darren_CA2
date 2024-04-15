@@ -221,7 +221,7 @@ void Board::displayAllCells() const {
     }
 }
 
-// Other test functions
+// Other functions
 void Board::displayAllCellsLiving() const {
     for (int x = 0; x < boardWidth; x++){ // for each x position
         for (int y = 0; y < boardHeight; y++){ // for each y position
@@ -257,4 +257,14 @@ void Board::displayAllCellsLiving() const {
             cout << endl; // end the current line
         }
     }
+}
+bool Board::oneBugRemains() const {
+    // Run through all bugs, if more than 1 is alive then return false
+    int count = 0;
+    for (Bug* bug : bugsVector){
+        if (bug->getAlive() == true){
+            count++;
+        }
+    }
+    return count <= 1; // if there's only 1 then return true
 }

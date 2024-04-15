@@ -11,9 +11,10 @@
 using namespace std;
 
 class Board {
-private:
+public:
     vector<vector<Cell*>> cells; // vector of cells
     vector<Bug*> bugsVector; // vector of pointer Bugs, so it can point at all derived objects (Hopper, Crawler)
+private:
     int boardHeight; // save height
     int boardWidth; // save width
 public:
@@ -35,8 +36,10 @@ public:
     void displayLifeHistory() const;
     void Exit() const;
     void displayAllCells() const;
-
+    void runSimulation();
+    // Other
     void displayAllCellsLiving() const;
+    bool oneBugRemains() const;
 };
 
 
