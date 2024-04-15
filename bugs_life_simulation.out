@@ -1,0 +1,4 @@
+1 Crawler Path: (1, 0), (2, 0), Eaten.
+2 Hopper Path: (1, 0), Eaten.
+3 Crawler Path: (3, 0), (2, 0), (1, 0), Alive!
+4 Hopper Path: (5, 0), (3, 0), (1, 0), Eaten.

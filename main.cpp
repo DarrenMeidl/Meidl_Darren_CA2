@@ -25,7 +25,7 @@ int main() {
 }
 
 void RunSimulation(Board &board){
-    ofstream outFile("../bugs_life_simulation.out");
+    string outFile("../bugs_life_simulation.out");
 
     board.fillInBugs();
     board.fillInCells();
@@ -34,6 +34,6 @@ void RunSimulation(Board &board){
         board.tapBoard();
         board.displayLifeHistory();
         board.ExitToSimulationFile(outFile);
-        sleep(1); // pause for a second
+        board.delay(1); // pause for a second
     }
 }

@@ -270,7 +270,11 @@ bool Board::oneBugRemains() const {
     }
     return count <= 1; // if there's only 1 then return true
 }
-void Board::ExitToSimulationFile(ofstream &file) const {
+void Board::ExitToSimulationFile(string &f) const {
+    // clear file by truncating
+    ofstream clearFile(f, ofstream::out | ofstream::trunc);
+    clearFile.close();
+    ofstream file(f);
     if (!file.is_open()){ // check if it can be opened
         cout << "CAN'T OPEN FILE" << endl;
         return;
@@ -286,7 +290,7 @@ void Board::ExitToSimulationFile(ofstream &file) const {
         file << (bug->getAlive() ? "Alive!" : "Eaten.") << endl;
     }
 }
-void delay(int seconds){
+void Board::delay(int seconds){
     clock_t endTime = clock() + seconds * CLOCKS_PER_SEC;
     while (clock() < endTime);
 }

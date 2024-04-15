@@ -40,7 +40,7 @@ public:
     // Other
     void displayAllCellsLiving() const;
     bool oneBugRemains() const;
-    void ExitToSimulationFile(ofstream &file) const;
+    void ExitToSimulationFile(string &file) const;
     void delay(int seconds);
 };
 
