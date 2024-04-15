@@ -59,8 +59,66 @@ void Cell::removeBug(Bug* b){
         cout << "Bug not in this cell" << endl; // print error
     }
 }
-
 void Cell::Fight(){
+    cout << "Fighting on cell: (" << position.first << ", " << position.second << ")" << endl;
+
+    if (bugsCellList.size() >= 2){
+        // "Find largest bug(s)"
+        Bug* largest = bugsCellList.front();
+        vector<Bug*> largestBugs;
+
+        // Debug print: List all bugs in the cell
+        cout << "Bugs in the cell: ";
+        for (Bug* b : bugsCellList) {
+            cout << b->getID() << " ";
+        }
+        cout << endl;
+
+        // Run through all bugs in the cell
+        for (Bug* current : bugsCellList){
+            if (current->getSize() > largest->getSize()){
+                largest = current;
+                largestBugs.clear();
+                largestBugs.push_back(largest);
+            }
+            else if (current->getSize() == largest->getSize()){
+                largestBugs.push_back(current);
+            }
+        }
+
+        // Debug print: List largest bugs
+        cout << "Largest bugs: ";
+        for (Bug* b : largestBugs) {
+            cout << b->getID() << " ";
+        }
+        cout << endl;
+
+        Bug* winner = largest;
+
+        if (largestBugs.size() >= 2){
+            int randomIndex = rand() % largestBugs.size();
+            winner = largestBugs[randomIndex];
+        }
+
+        for (Bug* b : bugsCellList){
+            if (b->getID() != winner->getID()){
+                b->setAlive(false);
+                winner->setSize(winner->getSize() + b->getSize());
+                if (winner->getSize() > 20) // Cap winner's size to 20 if it exceeds it
+                    winner->setSize(20);
+            }
+        }
+
+        cout << "Winner: " << winner->getID() << " with size " << winner->getSize() << endl;
+
+        largestBugs.clear();
+        //bugsCellList.clear();
+        //bugsCellList.push_back(winner);
+    }
+}
+
+
+/*void Cell::Fight(){
     if (bugsCellList.size() >= 2){
         // "Find largest bug(s)"
         Bug* largest = bugsCellList.front(); // set largest bug to first bug in the bugsCellList
@@ -99,4 +157,4 @@ void Cell::Fight(){
         bugsCellList.clear();
         bugsCellList.push_back(winner);
     }
-}
+}*/

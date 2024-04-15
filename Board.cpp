@@ -137,21 +137,25 @@ void Board::findBugByID() const {
 }
 // Menu Option 4
 void Board::tapBoard() {
+    // run through all cells in the cells vector
+    for (int x = 0; x < boardWidth; x++) { // for each x position - increment 0,1,2,3,4 etc.
+        for (int y = 0; y < boardHeight; y++) { // for each y position - increment 0,-1,-2,-3,-4 etc.
+            cells[x][y]->bugsCellList.clear(); // clear the previous bugs
+        }
+    }
     for (Bug* bug : bugsVector){ // run through all the bugs in the bugsVector
         cout << "***BEFORE MOVE***" << endl;
         bug->printBug();
-        // Get bug position
-        int bugX = bug->getPair().first;
-        int bugY = bug->getPair().second;
         // add bug to cell's bug vector - the cell at the same position as the bug
-        if (cells[bugX][-bugY] && bug->getAlive() == true) { // Check if cell pointer is valid & alive
-            bug->move(); // move this bug
+        if (bug->getAlive() == true) { // Check if bug pointer is alive
+            bug->move();
+            // Get bug position
+            int bugX = bug->getPair().first;
+            int bugY = bug->getPair().second;
             cells[bugX][-bugY]->bugsCellList.push_back(bug);
             cout << "***AFTER MOVE***" << endl;
             bug->printBug();
             cout << "" << endl;
-        } else if (!cells[bugX][-bugY]){
-            cout << "Invalid cell pointer at position: (" << bugX << ", " << bugY << ")" << endl;
         }
         //cells[bug->getPair().first][bug->getPair().second]->bugsCellList.push_back(bug);
     }
@@ -159,7 +163,7 @@ void Board::tapBoard() {
     // run through all cells in the cells vector
     for (int x = 0; x < boardWidth; x++) { // for each x position - increment 0,1,2,3,4 etc.
         for (int y = 0; y < boardHeight; y++) { // for each y position - increment 0,-1,-2,-3,-4 etc.
-            cells[x][y]->Fight();
+            cells[x][y]->Fight(); // fight the bugs
         }
     }
 }
