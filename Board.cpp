@@ -268,3 +268,20 @@ bool Board::oneBugRemains() const {
     }
     return count <= 1; // if there's only 1 then return true
 }
+void Board::ExitToSimulationFile(ofstream &file) const {
+    if (!file.is_open()){ // check if it can be opened
+        cout << "CAN'T OPEN FILE" << endl;
+        return;
+    }
+
+    list<pair<int, int>>::iterator iter; // iterator for the path list
+    for (Bug* bug : bugsVector) { // run through all the bugs in the vector
+        file << bug->getID() << " " << bug->getName() << " Path: "; // print id & name
+        // iterate through this bug's list called 'path'
+        for (const auto& pair : bug->getPath()){
+            file << "(" << pair.first << ", " << pair.second << "), "; // print each int from the pair seperately
+        }
+        file << (bug->getAlive() ? "Alive!" : "Eaten.") << endl;
+    }
+    file.close();
+}

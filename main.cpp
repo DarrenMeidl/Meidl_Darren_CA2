@@ -13,19 +13,27 @@
 
 using namespace std;
 
+void RunSimulation(Board &board);
+
 int main() {
     Board board(10, 10); // Create a new board
-    // Call the board's functions
-    board.fillInBugs();
-    board.fillInCells();
-    board.displayLifeHistory();
-
-        board.tapBoard();
-
-    board.displayLifeHistory();
+    RunSimulation(board);
     board.Exit();
     board.FreeMemoryAllocated();
 
     return 0;
 }
 
+void RunSimulation(Board &board){
+    ofstream outFile("../bugs_life_simulation.out");
+
+    board.fillInBugs();
+    board.fillInCells();
+    // Simulation runs until one bug remains
+    while (!board.oneBugRemains()){
+        board.tapBoard();
+        board.displayLifeHistory();
+        board.ExitToSimulationFile(outFile);
+        sleep(1); // pause for a second
+    }
+}
