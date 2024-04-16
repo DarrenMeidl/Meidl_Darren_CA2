@@ -51,13 +51,7 @@ void Board::setCellValue(int row, int col, int value) {
     }
 }
 
-void Board::fillInCells() {
-    for (int x = 0; x < boardWidth; x++) { // for each x position - increment 0,1,2,3,4 etc.
-        for (int y = 0; y < boardHeight; y++) { // for each y position - increment 0,-1,-2,-3,-4 etc.
-            cells[x][y] = new Cell(x, y, 0); // create new cell with value 0, set it to current x & y
-        }
-    }
-}
+
 
 
 
@@ -114,12 +108,20 @@ void Board::fillInBugs() {
 
     }
 }
+void Board::fillInCells() {
+    for (int x = 0; x < boardWidth; x++) { // for each x position - increment 0,1,2,3,4 etc.
+        for (int y = 0; y < boardHeight; y++) { // for each y position - increment 0,-1,-2,-3,-4 etc.
+            cells[x][y] = new Cell(x, y, 0); // create new cell with value 0, set it to current x & y
+        }
+    }
+}
 // Menu Option 2
 void Board::printAllBugs() const {
     // print the bug objects from the vector of bugs
     for (const Bug* bug : bugsVector){
         bug->printBug();
     }
+    cout << "" << endl;
 }
 // Menu Option 3
 void Board::findBugByID() const {
@@ -149,11 +151,11 @@ void Board::tapBoard() {
     for (Bug* bug : bugsVector){ // run through all the bugs in the bugsVector
         // add bug to cell's bug vector - the cell at the same position as the bug
         if (bug->getAlive() == true) { // Check if bug pointer is alive, if it's not then it's not allowed to move or be added to the cell
-            cout << "***BEFORE MOVE***" << endl;
+            cout << "---BEFORE MOVE---" << endl;
             bug->printBug();
             bug->move(); // move the bug
             cells[bug->getPair().first][-bug->getPair().second]->bugsCellList.push_back(bug); // add the bug to the cell, Put minus on the y in this so we change our -y position in the bug back to positive
-            cout << "***AFTER MOVE***" << endl;
+            cout << "---AFTER MOVE---" << endl;
             bug->printBug();
             cout << "" << endl;
         }
@@ -178,6 +180,7 @@ void Board::displayLifeHistory() const {
         }
         cout << (bug->getAlive() ? "Alive!" : "Eaten.") << endl;
     }
+    cout << "" << endl;
 }
 // Menu Option 6
 void Board::Exit() const {
