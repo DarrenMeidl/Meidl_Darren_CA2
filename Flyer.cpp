@@ -7,8 +7,8 @@
 
 using namespace std;
 
-random_device hopper_rd; // Create random number generator called hopper_rd
-mt19937 hopper_gen(hopper_rd()); // Seed the generator with a random device
+random_device flyer_rd; // Create random number generator called hopper_rd
+mt19937 flyer_gen(flyer_rd()); // Seed the generator with a random device
 
 bool Flyer::isWayBlocked(){
     // Get current bug position
@@ -40,7 +40,7 @@ void Flyer::move() {
     // while we are blocked at the edge of the board before we've started moving
     while (isWayBlocked() && tries < max){
         std::uniform_int_distribution<> dis(1, 4); // declare random integer between 1-4
-        direction = dis(hopper_gen); //set direction to that random integer
+        direction = dis(flyer_gen); //set direction to that random integer
         tries++; // increment attempts
     }
     // if we're still blocked after 100 attempts before we've started moving, then save our position & end the function early

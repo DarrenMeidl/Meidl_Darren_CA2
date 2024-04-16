@@ -8,6 +8,7 @@ using namespace std;
 #include "Bug.h"
 #include "Crawler.h"
 #include "Hopper.h"
+#include "Flyer.h"
 
 #include <vector>
 #include <string>
@@ -52,10 +53,10 @@ void Board::fillInBugs() {
             ss >> direction;
             ss.ignore(1);
             ss >> size;
-            Bug* crawler = new Crawler(id, x, y, direction, size); // create a pointer of type bug pointing at the new Hopper object
+            Bug* crawler = new Crawler(id, x, y, direction, size); // create a pointer of type bug pointing at the new Crawler object
             bugsVector.push_back(crawler); // Add the address of the object to the vector
         }
-            // If it's a hopper type, create a Crawler object and add it to the bugs vector
+        // If it's a hopper type, create a Hopper object and add it to the bugs vector
         else if (letter == 'H'){
             ss.ignore(1); // Ignore the semicolon
             ss >> id;
@@ -71,6 +72,23 @@ void Board::fillInBugs() {
             ss >> hopLength;
             Bug* hopper = new Hopper(id, x, y, direction, size, hopLength); // create a pointer of type bug pointing at the new Hopper object
             bugsVector.push_back(hopper); // Add the address of the object to the vector
+        }
+        // If it's a flyer type, create a Flyer object and add it to the bugs vector
+        else if (letter == 'F'){
+            ss.ignore(1); // Ignore the semicolon
+            ss >> id;
+            ss.ignore(1);
+            ss >> x;
+            ss.ignore(1);
+            ss >> y;
+            ss.ignore(1);
+            ss >> direction;
+            ss.ignore(1);
+            ss >> size;
+            ss.ignore(1);
+            ss >> hopLength;
+            Bug* flyer = new Flyer(id, x, y, direction, size, hopLength); // create a pointer of type bug pointing at the new Flyer object
+            bugsVector.push_back(flyer); // Add the address of the object to the vector
         }
 
     }
