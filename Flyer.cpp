@@ -10,6 +10,28 @@ using namespace std;
 random_device hopper_rd; // Create random number generator called hopper_rd
 mt19937 hopper_gen(hopper_rd()); // Seed the generator with a random device
 
+bool Flyer::isWayBlocked(){
+    // Get current bug position
+    int x = position.first;
+    int y = position.second;
+    // Check if bug is beside edge of the board (0,0 is top left)
+    // 1 = north west, 2 = north east, 3 = south east, 4 = south west
+    if (x == 0 && (direction == 4 || direction == 1)){ // if we're on the very left column and facing norht or south left
+        return true; // we are blocked
+    }
+    else if (x == 9 && (direction == 2 || direction == 3)){
+        return true;
+    }
+    else if (y == 0 && (direction == 1 || direction == 2)){
+        return true;
+    }
+    else if (y == -9 && (direction == 3 || direction == 4)){
+        return true;
+    }
+    // otherwise, we're not blocked so return false
+    return false;
+}
+
 void Flyer::move() {
     int tries = 0;
     const int max = 100; // max tries to find a valid move direction

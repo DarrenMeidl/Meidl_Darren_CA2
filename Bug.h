@@ -23,7 +23,7 @@ public:
     Bug(int id, int x, int y, int direction, int size)
             : id(id), position(make_pair(x, y*-1)), direction(direction), size(size), alive(true) {} // implement these variables, (alive is true by default)
     virtual void move() = 0; // ensures this Bug class is an abstract base class by having 1 pure virtual function
-    bool isWayBlocked();
+    virtual bool isWayBlocked();
     virtual void printBug() const = 0;
     int getID() const; // used for find by id function
     list<pair<int, int>> getPath() const;

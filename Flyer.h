@@ -21,6 +21,7 @@ public: // allows the function to be accessible from outside the class hierarchy
     void move() override; // Override the pure virtual function from the base class
     virtual void printBug() const override; // Override the pure virtual function from the base class
     virtual string getName() const override;
+    virtual bool isWayBlocked() override;
 };
 
 
