@@ -15,7 +15,9 @@ add_executable(Meidl_Darren_CA2 main.cpp
         Cell.cpp
         Cell.h
         Flyer.cpp
-        Flyer.h)
+        Flyer.h
+        SuperBug.cpp
+        SuperBug.h)
 
 set(SFML_STATIC_LIBRARIES TRUE)
 set(SFML_DIR C:/SFML-2.6.1/lib/cmake/SFML)

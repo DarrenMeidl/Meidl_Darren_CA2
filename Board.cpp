@@ -224,7 +224,6 @@ void Board::drawAll() const {
     cellShape.setOutlineColor(sf::Color::Black);
     cellShape.setOutlineThickness(2); // Thickness of the outline
 
-
     // Run through each cell
     for (int x = 0; x < cells.size(); ++x) {
         for (int y = 0; y < cells[x].size(); ++y) {

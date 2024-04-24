@@ -105,6 +105,14 @@ build CMakeFiles/Meidl_Darren_CA2.dir/Flyer.cpp.obj: CXX_COMPILER__Meidl_Darren_
   OBJECT_DIR = CMakeFiles\Meidl_Darren_CA2.dir
   OBJECT_FILE_DIR = CMakeFiles\Meidl_Darren_CA2.dir
 
+build CMakeFiles/Meidl_Darren_CA2.dir/SuperBug.cpp.obj: CXX_COMPILER__Meidl_Darren_CA2_unscanned_Debug C$:/Users/dmeid/CLionProjects/Meidl_Darren_CA2/SuperBug.cpp || cmake_object_order_depends_target_Meidl_Darren_CA2
+  DEFINES = -DSFML_STATIC
+  DEP_FILE = CMakeFiles\Meidl_Darren_CA2.dir\SuperBug.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always
+  INCLUDES = -isystem C:/SFML-2.6.1/include
+  OBJECT_DIR = CMakeFiles\Meidl_Darren_CA2.dir
+  OBJECT_FILE_DIR = CMakeFiles\Meidl_Darren_CA2.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target Meidl_Darren_CA2
@@ -113,7 +121,7 @@ build CMakeFiles/Meidl_Darren_CA2.dir/Flyer.cpp.obj: CXX_COMPILER__Meidl_Darren_
 #############################################
 # Link the executable Meidl_Darren_CA2.exe
 
-build Meidl_Darren_CA2.exe: CXX_EXECUTABLE_LINKER__Meidl_Darren_CA2_Debug CMakeFiles/Meidl_Darren_CA2.dir/main.cpp.obj CMakeFiles/Meidl_Darren_CA2.dir/Bug.cpp.obj CMakeFiles/Meidl_Darren_CA2.dir/Crawler.cpp.obj CMakeFiles/Meidl_Darren_CA2.dir/Hopper.cpp.obj CMakeFiles/Meidl_Darren_CA2.dir/Board.cpp.obj CMakeFiles/Meidl_Darren_CA2.dir/Cell.cpp.obj CMakeFiles/Meidl_Darren_CA2.dir/Flyer.cpp.obj | C$:/SFML-2.6.1/lib/libsfml-system-s-d.a C$:/SFML-2.6.1/lib/libsfml-window-s-d.a C$:/SFML-2.6.1/lib/libsfml-graphics-s-d.a C$:/SFML-2.6.1/lib/libsfml-audio-s-d.a C$:/SFML-2.6.1/lib/libsfml-window-s-d.a C$:/SFML-2.6.1/lib/libfreetype.a C$:/SFML-2.6.1/lib/libsfml-system-s-d.a C$:/SFML-2.6.1/lib/libopenal32.a C$:/SFML-2.6.1/lib/libvorbisfile.a C$:/SFML-2.6.1/lib/libvorbisenc.a C$:/SFML-2.6.1/lib/libvorbis.a C$:/SFML-2.6.1/lib/libogg.a C$:/SFML-2.6.1/lib/libFLAC.a
+build Meidl_Darren_CA2.exe: CXX_EXECUTABLE_LINKER__Meidl_Darren_CA2_Debug CMakeFiles/Meidl_Darren_CA2.dir/main.cpp.obj CMakeFiles/Meidl_Darren_CA2.dir/Bug.cpp.obj CMakeFiles/Meidl_Darren_CA2.dir/Crawler.cpp.obj CMakeFiles/Meidl_Darren_CA2.dir/Hopper.cpp.obj CMakeFiles/Meidl_Darren_CA2.dir/Board.cpp.obj CMakeFiles/Meidl_Darren_CA2.dir/Cell.cpp.obj CMakeFiles/Meidl_Darren_CA2.dir/Flyer.cpp.obj CMakeFiles/Meidl_Darren_CA2.dir/SuperBug.cpp.obj | C$:/SFML-2.6.1/lib/libsfml-system-s-d.a C$:/SFML-2.6.1/lib/libsfml-window-s-d.a C$:/SFML-2.6.1/lib/libsfml-graphics-s-d.a C$:/SFML-2.6.1/lib/libsfml-audio-s-d.a C$:/SFML-2.6.1/lib/libsfml-window-s-d.a C$:/SFML-2.6.1/lib/libfreetype.a C$:/SFML-2.6.1/lib/libsfml-system-s-d.a C$:/SFML-2.6.1/lib/libopenal32.a C$:/SFML-2.6.1/lib/libvorbisfile.a C$:/SFML-2.6.1/lib/libvorbisenc.a C$:/SFML-2.6.1/lib/libvorbis.a C$:/SFML-2.6.1/lib/libogg.a C$:/SFML-2.6.1/lib/libFLAC.a
   FLAGS = -g
   LINK_LIBRARIES = C:/SFML-2.6.1/lib/libsfml-system-s-d.a  C:/SFML-2.6.1/lib/libsfml-window-s-d.a  C:/SFML-2.6.1/lib/libsfml-graphics-s-d.a  C:/SFML-2.6.1/lib/libsfml-audio-s-d.a  C:/SFML-2.6.1/lib/libsfml-window-s-d.a  -lOpenGL32  -lgdi32  C:/SFML-2.6.1/lib/libfreetype.a  C:/SFML-2.6.1/lib/libsfml-system-s-d.a  -lwinmm  C:/SFML-2.6.1/lib/libopenal32.a  C:/SFML-2.6.1/lib/libvorbisfile.a  C:/SFML-2.6.1/lib/libvorbisenc.a  C:/SFML-2.6.1/lib/libvorbis.a  C:/SFML-2.6.1/lib/libogg.a  C:/SFML-2.6.1/lib/libFLAC.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\Meidl_Darren_CA2.dir
