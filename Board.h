@@ -8,7 +8,6 @@
 #include "Bug.h"
 #include <vector>
 #include <SFML/Graphics.hpp>
-
 using namespace std;
 
 class Board {
@@ -19,6 +18,7 @@ public:
 private:
     int boardHeight; // save height
     int boardWidth; // save width
+    Bug* player;
 public:
     // Constructor which allows us to set the dimensions of the board - Each row (x) has a corresponding list columns (y)
     Board(int rows, int cols, sf::RenderWindow& window) : cells(rows, vector<Cell*>(cols)), boardHeight(cols), boardWidth(rows), window(window) {}

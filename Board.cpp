@@ -9,6 +9,7 @@ using namespace std;
 #include "Crawler.h"
 #include "Hopper.h"
 #include "Flyer.h"
+#include "SuperBug.h"
 
 #include <vector>
 #include <string>
@@ -88,6 +89,7 @@ void Board::fillInBugs() {
         }
 
     }
+    Bug* player = new SuperBug(-1, 0, 0, 1, 20);
 }
 void Board::fillInCells() {
     for (int x = 0; x < boardWidth; x++) { // for each x position - increment 0,1,2,3,4 etc.
