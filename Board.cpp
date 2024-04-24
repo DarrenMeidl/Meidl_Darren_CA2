@@ -20,10 +20,6 @@ using namespace std;
 #include <ctime>
 
 
-
-
-
-
 // Main features
 // Menu Option 1
 void Board::fillInBugs() {
@@ -97,6 +93,12 @@ void Board::fillInCells() {
     for (int x = 0; x < boardWidth; x++) { // for each x position - increment 0,1,2,3,4 etc.
         for (int y = 0; y < boardHeight; y++) { // for each y position - increment 0,-1,-2,-3,-4 etc.
             cells[x][y] = new Cell(x, y, 0); // create new cell with value 0, set it to current x & y
+            cells[x][y]->bugsCellList.clear(); // clear any previous bugs on this cell
+        }
+    }
+    if (!bugsVector.empty()){ // if the bugs have been initialized
+        for (Bug* bug : bugsVector){ // add each bug to their respective cells
+            cells[bug->getPair().first][-bug->getPair().second]->bugsCellList.push_back(bug); // add the bug to the cell, Put minus on the y in this so we change our -y position in the bug back to positive
         }
     }
 }
@@ -210,8 +212,7 @@ void Board::displayAllCells() const {
         }
     }
 }
-
-// SFML
+// Feature 11 - SFML
 void Board::drawAll() const {
     // Calculate the size of each cell based on the window size and the number of cells
     float cellSizeX = window.getSize().x / cells.size();
@@ -243,6 +244,7 @@ void Board::drawAll() const {
         }
     }
 }
+
 
 // Other functions
 Board Board::getCopy() const{
