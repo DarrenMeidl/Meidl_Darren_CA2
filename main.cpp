@@ -16,7 +16,7 @@ using namespace std;
 void RunSimulation(Board &board, sf::RenderWindow &window);
 
 int main() {
-    sf::RenderWindow window(sf::VideoMode(800, 600), "Bug's Life Project");
+    sf::RenderWindow window(sf::VideoMode(800, 800), "Bug's Life Project");
     Board board(10, 10, window); // Create a new board
     bool running = true;
     while (running){
@@ -98,13 +98,11 @@ void RunSimulation(Board &board, sf::RenderWindow &window){
         window.display(); // display the new window
         board.displayLifeHistory();
         board.ExitToSimulationFile(outFile); // pass in the output file to the funciton
-        board.delay(1); // pause for a second
+        board.delay(.7); // pause for a second
     }
-    if (board.oneBugRemains()){
-        cout << "---ONE BUG STANDING---" << endl;
-        board.displayLifeHistory();
-        window.clear(); // clear previous window
-        board.drawAll(); // draw updated bug positions
-        window.display(); // display the new window
-    }
+    cout << "---ONE BUG STANDING---" << endl;
+    board.displayLifeHistory();
+    window.clear(); // clear previous window
+    board.drawAll(); // draw updated bug positions
+    window.display(); // display the new window
 }

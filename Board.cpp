@@ -98,7 +98,7 @@ void Board::fillInCells() {
     }
     if (!bugsVector.empty()){ // if the bugs have been initialized
         for (Bug* bug : bugsVector){ // add each bug to their respective cells
-            cells[bug->getPair().first][-bug->getPair().second]->bugsCellList.push_back(bug); // add the bug to the cell, Put minus on the y in this so we change our -y position in the bug back to positive
+            cells[bug->getPair().first][-bug->getPair().second]->bugsCellList.push_back(bug); // Put minus on the y here because bug constructor converts it back to positive
         }
     }
 }
@@ -141,7 +141,7 @@ void Board::tapBoard() {
             cout << "---BEFORE MOVE---" << endl;
             bug->printBug();
             bug->move(); // move the bug
-            cells[bug->getPair().first][-bug->getPair().second]->bugsCellList.push_back(bug); // add the bug to the cell, Put minus on the y in this so we change our -y position in the bug back to positive
+            cells[bug->getPair().first][-bug->getPair().second]->bugsCellList.push_back(bug); // add the bug to the cell, Put minus on the y here because bug constructor converts it back to positive
             cout << "---AFTER MOVE---" << endl;
             bug->printBug();
             cout << "" << endl;
@@ -218,15 +218,13 @@ void Board::drawAll() const {
     float cellSizeX = window.getSize().x / cells.size();
     float cellSizeY = window.getSize().y / cells[0].size();
 
-    // Create a rectangle shape for each cell and set its position, size, and color
+    // Create a rectangle shape for each cell: set its position, size, and color
     sf::RectangleShape cellShape(sf::Vector2f(cellSizeX, cellSizeY));
     cellShape.setFillColor(sf::Color::White);
     cellShape.setOutlineColor(sf::Color::Black);
     cellShape.setOutlineThickness(2); // Thickness of the outline
 
-    // Create a circle shape for bugs
-    sf::CircleShape bugShape(cellSizeX / 4); // reduce bug shape to fit inside cell grid
-    bugShape.setFillColor(sf::Color::Red); // Set bug color to red
+
     // Run through each cell
     for (int x = 0; x < cells.size(); ++x) {
         for (int y = 0; y < cells[x].size(); ++y) {
@@ -236,10 +234,20 @@ void Board::drawAll() const {
 
             // Check if the cell pointer is not nullptr & if there are any bugs on it
             if (cells[x][y] != nullptr && !cells[x][y]->bugsCellList.empty()) {
-                // if there is 1 or more bugs, draw a bug
-                // Set the position of the bug shape to the center of the cell
-                bugShape.setPosition(x * cellSizeX + cellSizeX / 4, y * cellSizeY + cellSizeY / 4);
-                window.draw(bugShape); // Draw the bug
+                // for each bug in the cell: draw a shape, set a colour & position center of cell
+                for (Bug* bug : cells[x][y]->bugsCellList){
+                    sf::CircleShape bugShape(cellSizeX / 4); // reduce bug shape to fit inside cell grid
+                    if (bug->getName() == "Crawler")
+                        bugShape.setFillColor(sf::Color::Red); // Set bug color to red
+                    else if (bug->getName() == "Hopper")
+                        bugShape.setFillColor(sf::Color::Green); // Set bug color to red
+                    else if (bug->getName() == "Flyer")
+                        bugShape.setFillColor(sf::Color::Blue); // Set bug color to red
+                    else
+                        bugShape.setFillColor(sf::Color::Black); // Set bug color to red
+                    bugShape.setPosition(x * cellSizeX + cellSizeX / 4, y * cellSizeY + cellSizeY / 4);
+                    window.draw(bugShape); // Draw the bug
+                }
             }
         }
     }
