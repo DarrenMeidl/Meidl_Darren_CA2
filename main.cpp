@@ -13,7 +13,7 @@
 
 using namespace std;
 
-void RunSimulation(Board &board);
+void RunSimulation(Board &board, sf::RenderWindow &window);
 
 int main() {
     sf::RenderWindow window(sf::VideoMode(800, 600), "Bug's Life Project");
@@ -42,6 +42,7 @@ int main() {
                 cout << "Initialising the Bug Board.." << endl;
                 board.fillInBugs();
                 board.fillInCells();
+                board.drawAll();
                 cout << "Bugs filled in!" << endl;
                 break;
             case 2:
@@ -71,11 +72,13 @@ int main() {
                 break;
             case 8:
                 cout << "Running simulation.." << endl;
-                RunSimulation(board);
+                RunSimulation(board, window);
                 break;
             case 9:
                 cout << "Goodbye :(" << endl;
                 running = false;
+                if (window.isOpen())
+                    window.close(); // Close window if its still open
                 break;
         }
         window.display();
@@ -85,14 +88,21 @@ int main() {
     return 0;
 }
 // Feature 9
-void RunSimulation(Board &board){
+void RunSimulation(Board &board, sf::RenderWindow &window){
     string outFile("../bugs_life_simulation.out");
     // Simulation runs until one bug remains
     while (!board.oneBugRemains()){
+        sf::Event event;
+        while (window.pollEvent(event)) { // Process all events
+            if (event.type == sf::Event::Closed) {
+                window.close(); // Close window if close button is pressed
+            }
+        }
+
         board.tapBoard();
+        board.drawAll();
         board.displayLifeHistory();
         board.ExitToSimulationFile(outFile); // pass in the output file to the funciton
-        board.drawAll();
         board.delay(1); // pause for a second
     }
     if (board.oneBugRemains()){
