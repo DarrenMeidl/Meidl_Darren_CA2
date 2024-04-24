@@ -211,6 +211,9 @@ void Board::displayAllCells() const {
     }
 }
 
+// SFML
+
+
 // Other functions
 Board Board::getCopy() const{
     return *this; // return only a copy of the board

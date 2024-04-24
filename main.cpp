@@ -16,7 +16,8 @@ using namespace std;
 void RunSimulation(Board &board);
 
 int main() {
-    Board board(10, 10); // Create a new board
+    sf::RenderWindow window(sf::VideoMode(800, 600), "Bug's Life Project");
+    Board board(10, 10, window); // Create a new board
     bool running = true;
     while (running){
         int input;
