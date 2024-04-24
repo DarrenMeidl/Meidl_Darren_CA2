@@ -39,7 +39,7 @@ public:
     void Exit() const;
     void displayAllCells() const;
     void runSimulation();
-
+    void drawAll() const;
     // Other
     void displayAllCellsLiving() const;
     bool oneBugRemains() const;

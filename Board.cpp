@@ -212,7 +212,37 @@ void Board::displayAllCells() const {
 }
 
 // SFML
+void Board::drawAll() const {
+    // Calculate the size of each cell based on the window size and the number of cells
+    float cellSizeX = window.getSize().x / cells.size();
+    float cellSizeY = window.getSize().y / cells[0].size();
 
+    // Create a rectangle shape for each cell and set its position, size, and color
+    sf::RectangleShape cellShape(sf::Vector2f(cellSizeX, cellSizeY));
+    cellShape.setFillColor(sf::Color::White);
+    cellShape.setOutlineColor(sf::Color::Black);
+    cellShape.setOutlineThickness(2); // Thickness of the outline
+
+    // Create a circle shape for bugs
+    sf::CircleShape bugShape(cellSizeX / 4); // reduce bug shape to fit inside cell grid
+    bugShape.setFillColor(sf::Color::Red); // Set bug color to red
+    // Run through each cell
+    for (int x = 0; x < cells.size(); ++x) {
+        for (int y = 0; y < cells[x].size(); ++y) {
+            // Set the position & draw the cell shape
+            cellShape.setPosition(x * cellSizeX, y * cellSizeY);
+            window.draw(cellShape);
+
+            // Check if the cell pointer is not nullptr & if there are any bugs on it
+            if (cells[x][y] != nullptr && !cells[x][y]->bugsCellList.empty()) {
+                // if there is 1 or more bugs, draw a bug
+                // Set the position of the bug shape to the center of the cell
+                bugShape.setPosition(x * cellSizeX + cellSizeX / 4, y * cellSizeY + cellSizeY / 4);
+                window.draw(bugShape); // Draw the bug
+            }
+        }
+    }
+}
 
 // Other functions
 Board Board::getCopy() const{

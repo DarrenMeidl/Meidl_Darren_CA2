@@ -20,6 +20,7 @@ int main() {
     Board board(10, 10, window); // Create a new board
     bool running = true;
     while (running){
+        window.clear();
         int input;
         cout << "**********************" << endl;
         cout << "* BUG'S LIFE PROJECT *" << endl;
@@ -54,6 +55,7 @@ int main() {
             case 4:
                 cout << "Tapping board.." << endl;
                 board.tapBoard();
+                board.drawAll();
                 break;
             case 5:
                 cout << "Displaying life history.." << endl;
@@ -76,6 +78,7 @@ int main() {
                 running = false;
                 break;
         }
+        window.display();
     }
     board.FreeMemoryAllocated();
 
@@ -89,10 +92,12 @@ void RunSimulation(Board &board){
         board.tapBoard();
         board.displayLifeHistory();
         board.ExitToSimulationFile(outFile); // pass in the output file to the funciton
+        board.drawAll();
         board.delay(1); // pause for a second
     }
     if (board.oneBugRemains()){
         cout << "---ONE BUG STANDING---" << endl;
         board.displayLifeHistory();
+        board.drawAll();
     }
 }
