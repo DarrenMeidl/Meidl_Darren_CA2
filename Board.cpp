@@ -89,7 +89,8 @@ void Board::fillInBugs() {
         }
 
     }
-    Bug* player = new SuperBug(-1, 0, 0, 1, 20);
+    player = new SuperBug(999, 9, 9, 1, 20);
+    bugsVector.push_back(player);
 }
 void Board::fillInCells() {
     for (int x = 0; x < boardWidth; x++) { // for each x position - increment 0,1,2,3,4 etc.
