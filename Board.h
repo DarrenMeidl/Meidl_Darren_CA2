@@ -6,6 +6,7 @@
 #define MEIDL_DARREN_CA2_BOARD_H
 #include "Cell.h"
 #include "Bug.h"
+#include "SuperBug.h"
 #include <vector>
 #include <SFML/Graphics.hpp>
 using namespace std;
@@ -15,10 +16,10 @@ public:
     vector<vector<Cell*>> cells; // vector of cells
     vector<Bug*> bugsVector; // vector of pointer Bugs, so it can point at all derived objects (Hopper, Crawler)
     sf::RenderWindow& window; // Reference to SFML window for drawing
+    SuperBug* player;
 private:
     int boardHeight; // save height
     int boardWidth; // save width
-    Bug* player;
 public:
     // Constructor which allows us to set the dimensions of the board - Each row (x) has a corresponding list columns (y)
     Board(int rows, int cols, sf::RenderWindow& window) : cells(rows, vector<Cell*>(cols)), boardHeight(cols), boardWidth(rows), window(window) {}

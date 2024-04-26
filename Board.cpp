@@ -140,7 +140,7 @@ void Board::tapBoard() {
     // Move each bug and add to their respective cells
     for (Bug* bug : bugsVector){ // run through all the bugs in the bugsVector
         // add bug to cell's bug vector - the cell at the same position as the bug
-        if (bug->getAlive() == true) { // Check if bug pointer is alive, if it's not then it's not allowed to move or be added to the cell
+        if (bug->getAlive() == true && bug->getID() != 999) { // Check if bug pointer is alive, if it's not then it's not allowed to move or be added to the cell
             cout << "---BEFORE MOVE---" << endl;
             bug->printBug();
             bug->move(); // move the bug

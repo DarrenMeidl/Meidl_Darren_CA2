@@ -96,9 +96,39 @@ void RunSimulation(Board &board, sf::RenderWindow &window){
         window.clear(); // clear previous window
         board.drawAll(); // draw updated bug positions
         window.display(); // display the new window
+
+
+        sf::Event event;
+
+        while (window.pollEvent(event)) {
+            switch (event.type) {
+                case sf::Event::Closed:
+                    window.close();
+                    break;
+                case sf::Event::KeyPressed:
+                    switch (event.key.code) {
+                        case sf::Keyboard::Up:
+                        case sf::Keyboard::Down:
+                        case sf::Keyboard::Left:
+                        case sf::Keyboard::Right:
+                            board.player->move(); // Call the move function for SuperBug
+                            window.clear(); // clear previous window
+                            board.drawAll(); // draw updated bug positions
+                            window.display(); // display the new window
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+
+
         board.displayLifeHistory();
         board.ExitToSimulationFile(outFile); // pass in the output file to the funciton
-        board.delay(.7); // pause for a second
+        board.delay(1); // pause for a second
     }
     cout << "---ONE BUG STANDING---" << endl;
     board.displayLifeHistory();
