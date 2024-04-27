@@ -353,9 +353,3 @@ void Board::ExitToSimulationFile(string &f) const {
         file << (bug->getAlive() ? "Alive!" : "Eaten.") << endl;
     }
 }
-void Board::delay(int seconds){
-    // adds number of clock ticks since the program started and adds the delay
-    // by converting the seconds into clock ticks
-    clock_t endTime = clock() + seconds * CLOCKS_PER_SEC;
-    while (clock() < endTime); // keeps going until the endTime is bigger than the current processor time
-}

@@ -14,13 +14,13 @@
 using namespace std;
 
 void RunSimulation(Board &board, sf::RenderWindow &window);
+void HandleSuperBugInput(Board &board, sf::RenderWindow &window);
 
 int main() {
     sf::RenderWindow window(sf::VideoMode(800, 800), "Bug's Life Project");
     Board board(10, 10, window); // Create a new board
     bool running = true;
     while (running){
-        window.clear();
         int input;
         cout << "**********************" << endl;
         cout << "* BUG'S LIFE PROJECT *" << endl;
@@ -78,10 +78,9 @@ int main() {
                 cout << "Goodbye :(" << endl;
                 running = false;
                 if (window.isOpen())
-                    window.close(); // Close window if its still open
+                    window.close(); // Close window if it is still open
                 break;
         }
-        window.display();
     }
     board.FreeMemoryAllocated();
 
@@ -93,49 +92,48 @@ void RunSimulation(Board &board, sf::RenderWindow &window){
     sf::Clock clock; // Create a clock to track time
     float elapsedTime = 0; // Variable to track elapsed time
     // Simulation runs until one bug remains
-    while (!board.oneBugRemains()){
-        // Event handling loop
-        sf::Event event;
-        while (window.pollEvent(event)) {
-            switch (event.type) {
-                case sf::Event::Closed:
-                    window.close();
-                    break;
-                case sf::Event::KeyPressed:
-                    switch (event.key.code) {
-                        case sf::Keyboard::Up:
-                        case sf::Keyboard::Down:
-                        case sf::Keyboard::Left:
-                        case sf::Keyboard::Right:
-                            board.player->move(); // Call the move function for SuperBug
-                            window.clear(); // clear previous window
-                            board.drawAll(); // draw updated bug positions
-                            window.display(); // display the new window
-                            break;
-                        default:
-                            break;
-                    }
-                    break;
-                default:
-                    break;
-            }
-        }
-        // Check if a second has passed
-        elapsedTime += clock.restart().asSeconds();
+    while (!board.oneBugRemains() && window.isOpen()){
+        // Handle user input for both the simulation and the window
+        HandleSuperBugInput(board, window);
+
+        elapsedTime += clock.restart().asSeconds(); // Check if a second has passed
+        // Update the simulation state
         if (elapsedTime >= 1.0f) {
-            board.tapBoard(); // move bugs
             elapsedTime = 0; // reset elapsed time
+            board.tapBoard(); // move bugs
+            board.displayLifeHistory();
+            board.ExitToSimulationFile(outFile); // pass in the output file to the function
         }
-        window.clear(); // clear previous window
-        board.drawAll(); // draw updated bug positions
-        window.display(); // display the new window
-        board.displayLifeHistory();
-        board.ExitToSimulationFile(outFile); // pass in the output file to the function
-        //board.delay(1); // pause for a second
+        // Clear the window and draw updated bug positions
+        window.clear();
+        board.drawAll();
+        window.display();
     }
     cout << "---ONE BUG STANDING---" << endl;
     board.displayLifeHistory();
-    window.clear(); // clear previous window
+    window.clear();
     board.drawAll(); // draw updated bug positions
     window.display(); // display the new window
+}
+
+void HandleSuperBugInput(Board &board, sf::RenderWindow &window){
+    sf::Event event;
+    while (window.pollEvent(event)) {
+        switch (event.type) {
+            case sf::Event::KeyPressed:
+                switch (event.key.code) {
+                    case sf::Keyboard::Up:
+                    case sf::Keyboard::Down:
+                    case sf::Keyboard::Left:
+                    case sf::Keyboard::Right:
+                        board.player->move(); // Call the move function for SuperBug
+                        break;
+                    default:
+                        break;
+                }
+                break;
+            default:
+                break;
+        }
+    }
 }
