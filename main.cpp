@@ -92,12 +92,6 @@ void RunSimulation(Board &board, sf::RenderWindow &window){
     string outFile("../bugs_life_simulation.out");
     // Simulation runs until one bug remains
     while (!board.oneBugRemains()){
-        board.tapBoard(); // move bugs
-        window.clear(); // clear previous window
-        board.drawAll(); // draw updated bug positions
-        window.display(); // display the new window
-
-
         sf::Event event;
 
         while (window.pollEvent(event)) {
@@ -124,8 +118,10 @@ void RunSimulation(Board &board, sf::RenderWindow &window){
                     break;
             }
         }
-
-
+        board.tapBoard(); // move bugs
+        window.clear(); // clear previous window
+        board.drawAll(); // draw updated bug positions
+        window.display(); // display the new window
         board.displayLifeHistory();
         board.ExitToSimulationFile(outFile); // pass in the output file to the funciton
         board.delay(1); // pause for a second

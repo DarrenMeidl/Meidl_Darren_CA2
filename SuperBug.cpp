@@ -7,10 +7,10 @@
 void SuperBug::move() {
     // Move the SuperBug based on arrow key input
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-        position.second--;
+        position.second++;
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-        position.second++;
+        position.second--;
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
         position.first--;
