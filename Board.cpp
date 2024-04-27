@@ -239,7 +239,7 @@ void Board::drawAll() const {
             if (cells[x][y] != nullptr && !cells[x][y]->bugsCellList.empty()) {
                 // for each bug in the cell: draw a shape, set a colour & position center of cell
                 for (Bug* bug : cells[x][y]->bugsCellList){
-                    sf::CircleShape bugShape(cellSizeX / 4); // reduce bug shape to fit inside cell grid
+                    sf::CircleShape bugShape(bug->getSize()); // reduce bug shape to fit inside cell grid based on their size
                     if (bug->getName() == "Crawler")
                         bugShape.setFillColor(sf::Color::Red); // Set bug color to red
                     else if (bug->getName() == "Hopper")
@@ -248,7 +248,10 @@ void Board::drawAll() const {
                         bugShape.setFillColor(sf::Color::Blue); // Set bug color to red
                     else
                         bugShape.setFillColor(sf::Color::Black); // Set bug color to red
-                    bugShape.setPosition(x * cellSizeX + cellSizeX / 4, y * cellSizeY + cellSizeY / 4);
+                    // Calculate the position to center the bug shape to the cell
+                    float bugPosX = x * cellSizeX + (cellSizeX - bug->getSize()) / 2 - bug->getSize() / 2;
+                    float bugPosY = y * cellSizeY + (cellSizeY - bug->getSize()) / 2 - bug->getSize() / 2;
+                    bugShape.setPosition(bugPosX, bugPosY);
                     window.draw(bugShape); // Draw the bug
                 }
             }

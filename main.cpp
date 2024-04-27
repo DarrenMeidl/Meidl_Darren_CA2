@@ -21,6 +21,7 @@ int main() {
     Board board(10, 10, window); // Create a new board
     bool running = true;
     while (running){
+        window.clear();
         int input;
         cout << "**********************" << endl;
         cout << "* BUG'S LIFE PROJECT *" << endl;
@@ -43,6 +44,7 @@ int main() {
                 board.fillInBugs();
                 board.fillInCells();
                 board.drawAll();
+                window.display();
                 cout << "Bugs filled in!" << endl;
                 break;
             case 2:
@@ -73,6 +75,10 @@ int main() {
             case 8:
                 cout << "Running simulation.." << endl;
                 RunSimulation(board, window);
+                cout << "Goodbye :(" << endl;
+                running = false;
+                if (window.isOpen())
+                    window.close(); // Close window if it is still open
                 break;
             case 9:
                 cout << "Goodbye :(" << endl;
