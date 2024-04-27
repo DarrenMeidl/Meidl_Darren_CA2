@@ -28,7 +28,6 @@ public:
     void setCellValue(int row, int col, int value); // set a value of a cell at any position in the board
     void fillInCells(); // fills in cells into the cells vector
 
-    Board getCopy() const; // returns a copy of the board
     void FreeMemoryAllocated();
 
     // Main Features - might need this: vector<Bug*> const &v

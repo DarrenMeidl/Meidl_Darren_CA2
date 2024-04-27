@@ -257,10 +257,6 @@ void Board::drawAll() const {
 }
 
 
-// Other functions
-Board Board::getCopy() const{
-    return *this; // return only a copy of the board
-}
 void Board::FreeMemoryAllocated() {
     // Free the memory allocated for the bug objects
     for (Bug* bug : bugsVector) {

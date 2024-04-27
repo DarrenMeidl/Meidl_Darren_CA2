@@ -90,10 +90,12 @@ int main() {
 // Feature 9
 void RunSimulation(Board &board, sf::RenderWindow &window){
     string outFile("../bugs_life_simulation.out");
+    sf::Clock clock; // Create a clock to track time
+    float elapsedTime = 0; // Variable to track elapsed time
     // Simulation runs until one bug remains
     while (!board.oneBugRemains()){
+        // Event handling loop
         sf::Event event;
-
         while (window.pollEvent(event)) {
             switch (event.type) {
                 case sf::Event::Closed:
@@ -118,13 +120,18 @@ void RunSimulation(Board &board, sf::RenderWindow &window){
                     break;
             }
         }
-        board.tapBoard(); // move bugs
+        // Check if a second has passed
+        elapsedTime += clock.restart().asSeconds();
+        if (elapsedTime >= 1.0f) {
+            board.tapBoard(); // move bugs
+            elapsedTime = 0; // reset elapsed time
+        }
         window.clear(); // clear previous window
         board.drawAll(); // draw updated bug positions
         window.display(); // display the new window
         board.displayLifeHistory();
-        board.ExitToSimulationFile(outFile); // pass in the output file to the funciton
-        board.delay(1); // pause for a second
+        board.ExitToSimulationFile(outFile); // pass in the output file to the function
+        //board.delay(1); // pause for a second
     }
     cout << "---ONE BUG STANDING---" << endl;
     board.displayLifeHistory();
