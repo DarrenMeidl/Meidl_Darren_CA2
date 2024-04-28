@@ -20,15 +20,14 @@ int main() {
         cout << "**********************" << endl;
         cout << "* BUG'S LIFE PROJECT *" << endl;
         cout << "**********************" << endl;
-        cout << "1. Initialise the Bug Board" << endl;
+        cout << "1. Initialise the Bug Board (load data from file)" << endl;
         cout << "2. Display All Bugs" << endl;
-        cout << "3. Find a Bug" << endl;
-        cout << "4. Tap the Bug Board" << endl;
-        cout << "5. Display Life History of all Bugs" << endl;
-        cout << "6. Exit" << endl;
-        cout << "7. Display all Cells" << endl;
-        cout << "8. Run Simulation" << endl;
-        cout << "9. Quit" << endl;
+        cout << "3. Find a Bug (given an id)" << endl;
+        cout << "4. Tap the Bug Board (causes move all, then fight/eat)" << endl;
+        cout << "5. Display Life History of all Bugs (path taken)" << endl;
+        cout << "6. Display all Cells listing their Bugs" << endl;
+        cout << "7. Run Simulation (generates a Tap every second)" << endl;
+        cout << "8. Exit (write Life History of all Bugs to file)" << endl;
         cout << "----------------------" << endl;
         cout << "Enter menu option: " << endl;
         cin >> input;
@@ -58,19 +57,17 @@ int main() {
                 board.displayLifeHistory();
                 break;
             case 6:
-                cout << "Exiting to file.." << endl;
-                board.Exit();
-                break;
-            case 7:
                 cout << "Displaying all cells.." << endl;
                 board.displayAllCells();
                 break;
-            case 8:
+            case 7:
                 cout << "Running simulation.." << endl;
                 board.RunSimulation();
                 cout << "Simulation over." << endl;
                 break;
-            case 9:
+            case 8:
+                cout << "Exiting to file.." << endl;
+                board.Exit();
                 cout << "Goodbye :(" << endl;
                 running = false;
                 if (window.isOpen())

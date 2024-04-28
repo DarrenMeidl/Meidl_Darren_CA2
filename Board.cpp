@@ -239,7 +239,6 @@ void Board::RunSimulation() {
         if (elapsedTime >= 1.0f) { // Check if a second has passed
             elapsedTime = 0; // reset elapsed time
             tapBoard(); // move bugs
-            displayLifeHistory();
             ExitToSimulationFile(outFile); // pass in the output file to the function
         }
         // Clear the window and draw updated bug positions
