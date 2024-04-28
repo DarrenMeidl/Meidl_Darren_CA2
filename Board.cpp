@@ -162,7 +162,6 @@ void Board::tapBoard() {
 }
 // Menu Option 5
 void Board::displayLifeHistory() const {
-    list<pair<int, int>>::iterator iter; // iterator for the path list
     for (Bug* bug : bugsVector) { // run through all the bugs in the vector
         cout << bug->getID() << " " << bug->getName() << " Path: "; // print id & name
         // iterate through this bug's list called 'path'
@@ -192,15 +191,15 @@ void Board::Exit() const {
 
     // Write the life history of all bugs to the file
     for (Bug* bug : bugsVector) { // run through all the bugs in the vector
-        cout << bug->getID() << " " << bug->getName() << " Path: "; // print id & name
+        file << bug->getID() << " " << bug->getName() << " Path: "; // print id & name
         // iterate through this bug's list called 'path'
         for (const auto& pair : bug->getPath()){
-            cout << "(" << pair.first << ", " << pair.second << "), "; // print each int from the pair seperately
+            file << "(" << pair.first << ", " << pair.second << "), "; // print each int from the pair seperately
         }
         if (bug->getAlive())
-            cout << "Alive!" << endl;
+            file << "Alive!" << endl;
         else
-            cout << "Eaten by " << bug->getEatenByID() << endl; // If eaten, return id of the bug that killed this bug
+            file << "Eaten by " << bug->getEatenByID() << endl; // If eaten, return id of the bug that killed this bug
     }
     file.close();
 }
@@ -392,13 +391,15 @@ void Board::ExitToSimulationFile(string &f) const {
         return;
     }
 
-    list<pair<int, int>>::iterator iter; // iterator for the path list
     for (Bug* bug : bugsVector) { // run through all the bugs in the vector
         file << bug->getID() << " " << bug->getName() << " Path: "; // print id & name
         // iterate through this bug's list called 'path'
         for (const auto& pair : bug->getPath()){
             file << "(" << pair.first << ", " << pair.second << "), "; // print each int from the pair seperately
         }
-        file << (bug->getAlive() ? "Alive!" : "Eaten.") << endl;
+        if (bug->getAlive())
+            file << "Alive!" << endl;
+        else
+            file << "Eaten by " << bug->getEatenByID() << endl; // If eaten, return id of the bug that killed this bug
     }
 }
