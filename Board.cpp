@@ -181,12 +181,17 @@ void Board::Exit() const {
         return;
     }
 
-    list<pair<int, int>>::iterator iter; // iterator for the path list
-    for (Bug* bug : bugsVector) { // run through all the bugs in the vector
-        file << bug->getID() << " " << bug->getName() << " Path: "; // print id & name
-        // iterate through this bug's list called 'path'
-        for (const auto& pair : bug->getPath()){
-            file << "(" << pair.first << ", " << pair.second << "), "; // print each int from the pair seperately
+    time_t currentTime = time(nullptr); // get the current time
+    struct tm* localTime = localtime(&currentTime); // contains info for year,month etc. from currentTime
+    char dateTimeStr[100]; // buffer for date and time string
+    strftime(dateTimeStr, sizeof(dateTimeStr), "%Y-%m-%d %H:%M:%S", localTime);
+    file << "Life History Export - Date and Time: " << dateTimeStr << endl;
+
+    // Write the life history of all bugs to the file
+    for (Bug* bug : bugsVector) {
+        file << bug->getID() << " " << bug->getName() << " Path: ";
+        for (const auto& pair : bug->getPath()) {
+            file << "(" << pair.first << ", " << pair.second << "), ";
         }
         file << (bug->getAlive() ? "Alive!" : "Eaten.") << endl;
     }
@@ -240,7 +245,7 @@ void Board::drawAll() const {
             cellShape.setPosition(x * cellSizeX, y * cellSizeY);
             window.draw(cellShape);
             // Check if the cell pointer is not nullptr & if there are any bugs on it
-            if (cells[x][y] != nullptr && !cells[x][y]->bugsCellList.empty()) {
+            if (cells[x][y] != nullptr || !cells[x][y]->bugsCellList.empty()) {
                 // DRAWING ALL BUGS
                 for (Bug* bug : cells[x][y]->bugsCellList){ // for each bug in the cell: set position, set texture, draw
                     // Calculate the position to center the bug sprite to the cell
@@ -261,45 +266,12 @@ void Board::drawAll() const {
                         bugTexture.loadFromFile("../Bug Images/SuperBug.png");
                     // Apply the texture and set the scale
                     bugSprite.setTexture(bugTexture);
-
-
                     window.draw(bugSprite); // Draw the bug sprite
                 }
             }
 
         }
     }
-    // DRAWING ALL BUGS IN EACH CELL
-    /*for (int x = 0; x < cells.size(); ++x) {
-        for (int y = 0; y < cells[x].size(); ++y) {
-            // Check if the cell pointer is not nullptr & if there are any bugs on it
-            if (cells[x][y] != nullptr && !cells[x][y]->bugsCellList.empty()) {
-                // DRAWING ALL BUGS
-                for (Bug* bug : cells[x][y]->bugsCellList){ // for each bug in the cell: set position, set texture, draw
-                    // Calculate the position to center the bug sprite to the cell
-                    float bugPosX = x * cellSizeX + (cellSizeX/6);
-                    float bugPosY = y * cellSizeY + (cellSizeY/6);
-                    bugSprite.setPosition(bugPosX, bugPosY);
-                    // Set the texture based on bug type
-                    if (bug->getName() == "Crawler")
-                        bugTexture.loadFromFile("../Bug Images/Crawler.png");
-                    else if (bug->getName() == "Hopper")
-                        bugTexture.loadFromFile("../Bug Images/Hopper.png");
-                    else if (bug->getName() == "Flyer")
-                        bugTexture.loadFromFile("../Bug Images/Flyer.png");
-                    else
-                        bugTexture.loadFromFile("../Bug Images/SuperBug.png");
-                    // Apply the texture and set the scale
-                    bugSprite.setTexture(bugTexture);
-
-                    // Calculate the scale factor based on the bug size and maximum bug size
-                    float scaleFactor = static_cast<float>(bug->getSize()) / 20.0f * maxBugSize;
-                    bugSprite.setScale(scaleFactor, scaleFactor); // set the size
-                    window.draw(bugSprite); // Draw the bug sprite
-                }
-            }
-        }
-    }*/
 
     window.display();
 }
