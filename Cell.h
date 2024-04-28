@@ -23,14 +23,8 @@ public:
     void setValue(int value);
     void printPosition() const;
     void incrementValue(int amount);
-    pair<int, int> getPosition() const;
-    void setPosition(int x, int y);
     string getState() const;
     void setState(string s);
-    // add bug to list
-    void addBug(Bug* bug);
-    // remove bug from list
-    void removeBug(Bug* bug);
     // check for conflicts
     void Fight();
 };
