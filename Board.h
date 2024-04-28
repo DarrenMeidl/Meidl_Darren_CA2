@@ -40,6 +40,7 @@ public:
     void displayAllCells() const;
     void runSimulation();
     void drawAll() const;
+    void HandleSuperBugInput();
     // Other
     void displayAllCellsLiving() const;
     bool oneBugRemains() const;

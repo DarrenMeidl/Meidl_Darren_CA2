@@ -14,7 +14,6 @@
 using namespace std;
 
 void RunSimulation(Board &board, sf::RenderWindow &window);
-void HandleSuperBugInput(Board &board, sf::RenderWindow &window);
 
 int main() {
     sf::RenderWindow window(sf::VideoMode(800, 800), "Bug's Life Project");
@@ -99,12 +98,10 @@ void RunSimulation(Board &board, sf::RenderWindow &window){
     float elapsedTime = 0; // Variable to track elapsed time
     // Simulation runs until one bug remains
     while (!board.oneBugRemains() && window.isOpen()){
-        // Handle user input for both the simulation and the window
-        HandleSuperBugInput(board, window);
+        board.HandleSuperBugInput(); // handle player input
 
-        elapsedTime += clock.restart().asSeconds(); // Check if a second has passed
-        // Update the simulation state
-        if (elapsedTime >= 1.0f) {
+        elapsedTime += clock.restart().asSeconds(); // increment time
+        if (elapsedTime >= 1.0f) { // Check if a second has passed
             elapsedTime = 0; // reset elapsed time
             board.tapBoard(); // move bugs
             board.displayLifeHistory();
@@ -122,24 +119,3 @@ void RunSimulation(Board &board, sf::RenderWindow &window){
     window.display(); // display the new window
 }
 
-void HandleSuperBugInput(Board &board, sf::RenderWindow &window){
-    sf::Event event;
-    while (window.pollEvent(event)) {
-        switch (event.type) {
-            case sf::Event::KeyPressed:
-                switch (event.key.code) {
-                    case sf::Keyboard::Up:
-                    case sf::Keyboard::Down:
-                    case sf::Keyboard::Left:
-                    case sf::Keyboard::Right:
-                        board.player->move(); // Call the move function for SuperBug
-                        break;
-                    default:
-                        break;
-                }
-                break;
-            default:
-                break;
-        }
-    }
-}

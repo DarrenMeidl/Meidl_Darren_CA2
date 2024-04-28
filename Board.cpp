@@ -258,8 +258,30 @@ void Board::drawAll() const {
         }
     }
 }
-
-
+// Feature 11 - SUPERBUG INPUT
+void Board::HandleSuperBugInput(){
+    sf::Event event;
+    while (window.pollEvent(event)) {
+        switch (event.type) {
+            case sf::Event::KeyPressed: // if a key is pressed
+                switch (event.key.code) {
+                    // if that key pressed is either up, down, left, or right
+                    case sf::Keyboard::Up:
+                    case sf::Keyboard::Down:
+                    case sf::Keyboard::Left:
+                    case sf::Keyboard::Right:
+                        player->move(); // Call the move function for SuperBug
+                        break;
+                    default: // otherwise break
+                        break;
+                }
+                break;
+            default:
+                break;
+        }
+    }
+}
+// Delete pointers
 void Board::FreeMemoryAllocated() {
     // Free the memory allocated for the bug objects
     for (Bug* bug : bugsVector) {

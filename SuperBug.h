@@ -17,7 +17,7 @@ public:
     SuperBug(int id, int x, int y, int direction, int size)
     : Bug(id, x, y, direction, size), name("Super") {}
     void move() override; // Override the pure virtual function from the base class
-    void handleInput(sf::Event& event);
+    //void handleInput(sf::Event& event);
     virtual void printBug() const override; // Override the pure virtual function from the base class
     virtual string getName() const override;
 };
