@@ -1,16 +1,11 @@
 // CA2 by Darren Meidl GD2b
 #include <iostream>
 #include <SFML/Graphics.hpp>
-#include "Bug.h"
-#include <vector>
-#include <fstream>
 #include <string>
-#include <sstream>
-#include "Crawler.h"
-#include "Hopper.h"
 #include <ostream>
-#include "Board.h"
 
+#include "Board.h"
+#include "Bug.h"
 using namespace std;
 
 void RunSimulation(Board &board, sf::RenderWindow &window);

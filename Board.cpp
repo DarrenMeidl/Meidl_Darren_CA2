@@ -21,7 +21,7 @@ using namespace std;
 #include <ctime>
 
 
-// Main features
+// MAIN FEATURES
 // Menu Option 1
 void Board::fillInBugs() {
     ifstream file("../bugs.txt"); // open file to read from it
@@ -227,7 +227,42 @@ void Board::displayAllCells() const {
         }
     }
 }
-// Feature 11 - SFML
+// Menu Option 8 - Exit to file, check if one bug remains
+void Board::ExitToSimulationFile(string &f) const {
+    // truncate the file 'f' if the file can be opened
+    ofstream clearFile(f, ofstream::out | ofstream::trunc);
+    clearFile.close(); // close it to ensure no errors
+
+    ofstream file(f);
+    if (!file.is_open()){ // check if it can be opened
+        cout << "CAN'T OPEN FILE" << endl;
+        return;
+    }
+
+    for (Bug* bug : bugsVector) { // run through all the bugs in the vector
+        file << bug->getID() << " " << bug->getName() << " Path: "; // print id & name
+        // iterate through this bug's list called 'path'
+        for (const auto& pair : bug->getPath()){
+            file << "(" << pair.first << ", " << pair.second << "), "; // print each int from the pair seperately
+        }
+        if (bug->getAlive())
+            file << "Alive!" << endl;
+        else
+            file << "Eaten by " << bug->getEatenByID() << endl; // If eaten, return id of the bug that killed this bug
+    }
+}
+bool Board::oneBugRemains() const {
+    // Run through all bugs, if more than 1 is alive then return false
+    int count = 0;
+    for (Bug* bug : bugsVector){
+        if (bug->getAlive() == true){
+            count++;
+        }
+    }
+    return count <= 1; // if there's only 1 then return true
+}
+
+// Feature 11 - SFML, SUPERBUG INPUT
 void Board::drawAll() const {
     window.clear();
     // Calculate the size of each cell based on the window size and the number of cells
@@ -281,7 +316,6 @@ void Board::drawAll() const {
 
     window.display();
 }
-// Feature 11 - SUPERBUG INPUT
 void Board::HandleSuperBugInput(){
     sf::Event event;
     while (window.pollEvent(event)) {
@@ -304,7 +338,8 @@ void Board::HandleSuperBugInput(){
         }
     }
 }
-// Delete pointers
+
+// Delete pointers after program ends
 void Board::FreeMemoryAllocated() {
     // Free the memory allocated for the bug objects
     for (Bug* bug : bugsVector) {
@@ -314,92 +349,5 @@ void Board::FreeMemoryAllocated() {
         for (auto cell : row) { // go through each cell in row
             delete cell; // free memory
         }
-    }
-}
-
-// Getters & Setters (Cells)
-int Board::getCellValue(int row, int col) const {
-    // Check bounds to ensure row and col are valid before getting cell
-    if (col >= -9 && col < cells.size() && row >= 0 && row < cells[0].size()){
-        return cells[row][col + 9]->getValue(); // since the board uses -y but our cells vector doesn't, we counteract the -9
-    } else{
-        return -1; // the cell is out of bounds
-    }
-}
-void Board::setCellValue(int row, int col, int value) {
-    // Check bounds to ensure row and col are valid before setting cell
-    if (col >= -9 && col < cells.size() && row >= 0 && row < cells[0].size()) {
-        cells[row][col + 9]->setValue(value); // since the board uses -y but our cells vector doesn't, we counteract the -9
-    } else {
-        cout << "INVALID CELL POSITION" << endl; // do nothing if out of bounds
-    }
-}
-void Board::displayAllCellsLiving() const {
-    for (int x = 0; x < boardWidth; x++){ // for each x position
-        for (int y = 0; y < boardHeight; y++){ // for each y position
-            // Check bounds
-            if (x >= cells.size() || y >= cells[x].size()) {
-                cout << "Invalid cell position: (" << x << ", " << y << ")" << endl;
-                continue;
-            }
-
-            bool isEmpty = true; // assume the cell is empty unless told otherwise
-            cells[x][y]->printPosition(); // print the cell at this position
-            cells[x][y]->setValue(0);
-            cells[x][y]->setState("empty");
-            cout << ": ";
-
-            for (const Bug* bug : bugsVector) { // for each bug
-                // Check if the bug pointer is valid
-                if (!bug) {
-                    cout << "Invalid bug pointer" << endl;
-                    continue;
-                }
-
-                //if this bug's position matches the cell position & is alive
-                if ((bug->getPair().first == x && bug->getPair().second == -y) && (bug->getAlive() == true)){ // if it does (*-1 because while our y's in this loop are positive, the actual bug's y value is negative)
-                    isEmpty = false; // this cell is no longer empty
-                    cells[x][y]->incrementValue(1); // +1 value since there's +1 bug on this cell, it is no longer empty
-                    cout << bug->getName() << " " << bug->getID() << " "; // print name & id of bug
-                }
-            }
-            if (isEmpty){
-                cout << cells[x][y]->getState(); // print the state string "empty"
-            }
-            cout << endl; // end the current line
-        }
-    }
-}
-bool Board::oneBugRemains() const {
-    // Run through all bugs, if more than 1 is alive then return false
-    int count = 0;
-    for (Bug* bug : bugsVector){
-        if (bug->getAlive() == true){
-            count++;
-        }
-    }
-    return count <= 1; // if there's only 1 then return true
-}
-void Board::ExitToSimulationFile(string &f) const {
-    // truncate the file 'f' if the file can be opened
-    ofstream clearFile(f, ofstream::out | ofstream::trunc);
-    clearFile.close(); // close it to ensure no errors
-    
-    ofstream file(f);
-    if (!file.is_open()){ // check if it can be opened
-        cout << "CAN'T OPEN FILE" << endl;
-        return;
-    }
-
-    for (Bug* bug : bugsVector) { // run through all the bugs in the vector
-        file << bug->getID() << " " << bug->getName() << " Path: "; // print id & name
-        // iterate through this bug's list called 'path'
-        for (const auto& pair : bug->getPath()){
-            file << "(" << pair.first << ", " << pair.second << "), "; // print each int from the pair seperately
-        }
-        if (bug->getAlive())
-            file << "Alive!" << endl;
-        else
-            file << "Eaten by " << bug->getEatenByID() << endl; // If eaten, return id of the bug that killed this bug
     }
 }

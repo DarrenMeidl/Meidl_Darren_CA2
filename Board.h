@@ -9,6 +9,7 @@
 #include "SuperBug.h"
 #include <vector>
 #include <SFML/Graphics.hpp>
+
 using namespace std;
 
 class Board {
