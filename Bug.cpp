@@ -51,3 +51,9 @@ void Bug::setAlive(bool a) {
 void Bug::setSize(int size){
     this->size = size;
 }
+int Bug::getEatenByID() const {
+    return eatenBy->getID();
+}
+void Bug::setEatenBy(Bug* bug) {
+    eatenBy = bug;
+}

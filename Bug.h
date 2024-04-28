@@ -18,6 +18,7 @@ protected: // variables declared as protected (only this class & derived classes
     int size;
     bool alive;
     list<pair<int, int>> path;
+    Bug* eatenBy;
 public:
     // Constructor takes in an x & y ints but implements them as a pair
     Bug(int id, int x, int y, int direction, int size)
@@ -33,6 +34,8 @@ public:
     int getSize() const;
     void setAlive(bool a);
     void setSize(int size);
+    int getEatenByID() const; // // used in display life history function
+    void setEatenBy(Bug* bug);
 };
 
 
