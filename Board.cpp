@@ -227,6 +227,10 @@ void Board::drawAll() const {
     cellShape.setFillColor(sf::Color::White);
     cellShape.setOutlineColor(sf::Color::Black);
     cellShape.setOutlineThickness(2); // Thickness of the outline
+    // Create texture and sprite for bugs
+    sf::Texture bugTexture;
+    sf::Sprite bugSprite;
+    float maxBugSize = 0.1f * (window.getSize().x / 800.0f); // if the window size is 800x800 then the max bug size scale is 0.1
 
     // DRAWING ALL CELLS
     for (int x = 0; x < cells.size(); ++x) {
@@ -243,20 +247,11 @@ void Board::drawAll() const {
             if (cells[x][y] != nullptr && !cells[x][y]->bugsCellList.empty()) {
                 // DRAWING ALL BUGS
                 for (Bug* bug : cells[x][y]->bugsCellList){ // for each bug in the cell: set position, set texture, draw
-                    sf::Texture bugTexture;
-                    sf::Sprite bugSprite;
-
                     // Calculate the position to center the bug sprite to the cell
                     float bugPosX = x * cellSizeX + (cellSizeX/6);
                     float bugPosY = y * cellSizeY + (cellSizeY/6);
-
-                    bugSprite.setPosition(bugPosX, bugPosY); // set the position
-
-                    if (!bugTexture.loadFromFile("../Bug Images/Crawler.png")) {
-                        // Handle error loading texture
-                        std::cerr << "Error loading texture!" << std::endl;
-                    }
-
+                    bugSprite.setPosition(bugPosX, bugPosY);
+                    // Set the texture based on bug type
                     if (bug->getName() == "Crawler")
                         bugTexture.loadFromFile("../Bug Images/Crawler.png");
                     else if (bug->getName() == "Hopper")
@@ -265,16 +260,14 @@ void Board::drawAll() const {
                         bugTexture.loadFromFile("../Bug Images/Flyer.png");
                     else
                         bugTexture.loadFromFile("../Bug Images/SuperBug.png");
-
-
-
+                    // Apply the texture and set the scale
                     bugSprite.setTexture(bugTexture);
 
-                    bugSprite.setScale(0.1, 0.1); // set the size
-
+                    // Calculate the scale factor based on the bug size and maximum bug size
+                    float scaleFactor = static_cast<float>(bug->getSize()) / 20.0f * maxBugSize;
+                    bugSprite.setScale(scaleFactor, scaleFactor); // set the size
                     window.draw(bugSprite); // Draw the bug sprite
                 }
-
             }
         }
     }
