@@ -12,6 +12,7 @@ int main() {
     sf::RenderWindow window(sf::VideoMode(800, 800), "Bug's Life Project");
     Board board(10, 10, window); // Create a new board
     bool running = true;
+
     while (running){
         window.clear();
         int input;
@@ -66,7 +67,6 @@ int main() {
             case 8:
                 cout << "Running simulation.." << endl;
                 board.RunSimulation();
-                window.close();
                 cout << "Simulation over." << endl;
                 break;
             case 9:

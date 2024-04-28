@@ -226,7 +226,29 @@ void Board::displayAllCells() const {
         }
     }
 }
-// Menu Option 8 - Exit to file, check if one bug remains
+// Menu Option 8 - Simulation, Exit to file, check if one bug remains
+void Board::RunSimulation() {
+    string outFile("../bugs_life_simulation.out");
+    sf::Clock clock; // Create a clock to track time
+    float elapsedTime = 0; // Variable to track elapsed time
+    // Simulation runs until one bug remains
+    while (!oneBugRemains() && window.isOpen()){
+        HandleSuperBugInput(); // handle player input
+
+        elapsedTime += clock.restart().asSeconds(); // increment time
+        if (elapsedTime >= 1.0f) { // Check if a second has passed
+            elapsedTime = 0; // reset elapsed time
+            tapBoard(); // move bugs
+            displayLifeHistory();
+            ExitToSimulationFile(outFile); // pass in the output file to the function
+        }
+        // Clear the window and draw updated bug positions
+        drawAll();
+    }
+    cout << "---ONE BUG STANDING---" << endl;
+    displayLifeHistory();
+    window.close(); // close window after simulation ends
+}
 void Board::ExitToSimulationFile(string &f) const {
     // truncate the file 'f' if the file can be opened
     ofstream clearFile(f, ofstream::out | ofstream::trunc);
@@ -260,28 +282,7 @@ bool Board::oneBugRemains() const {
     }
     return count <= 1; // if there's only 1 then return true
 }
-void Board::RunSimulation() {
-    string outFile("../bugs_life_simulation.out");
-    sf::Clock clock; // Create a clock to track time
-    float elapsedTime = 0; // Variable to track elapsed time
-    // Simulation runs until one bug remains
-    while (!oneBugRemains() && window.isOpen()){
-        HandleSuperBugInput(); // handle player input
 
-        elapsedTime += clock.restart().asSeconds(); // increment time
-        if (elapsedTime >= 1.0f) { // Check if a second has passed
-            elapsedTime = 0; // reset elapsed time
-            tapBoard(); // move bugs
-            displayLifeHistory();
-            ExitToSimulationFile(outFile); // pass in the output file to the function
-        }
-        // Clear the window and draw updated bug positions
-        drawAll();
-    }
-    cout << "---ONE BUG STANDING---" << endl;
-    displayLifeHistory();
-    drawAll(); // draw updated bug positions
-}
 
 // Feature 11 - SFML, SUPERBUG INPUT
 void Board::drawAll() const {
