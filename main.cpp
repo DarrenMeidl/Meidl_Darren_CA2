@@ -6,6 +6,7 @@
 
 #include "Board.h"
 #include "Bug.h"
+
 using namespace std;
 
 int main() {
@@ -77,31 +78,6 @@ int main() {
                 break;
         }
     }
-    board.FreeMemoryAllocated();
-
+    board.FreeMemoryAllocated(); // delete all pointers
     return 0;
 }
-/*
-// Feature 9
-void RunSimulation(Board &board, sf::RenderWindow &window){
-    string outFile("../bugs_life_simulation.out");
-    sf::Clock clock; // Create a clock to track time
-    float elapsedTime = 0; // Variable to track elapsed time
-    // Simulation runs until one bug remains
-    while (!board.oneBugRemains() && window.isOpen()){
-        board.HandleSuperBugInput(); // handle player input
-
-        elapsedTime += clock.restart().asSeconds(); // increment time
-        if (elapsedTime >= 1.0f) { // Check if a second has passed
-            elapsedTime = 0; // reset elapsed time
-            board.tapBoard(); // move bugs
-            board.displayLifeHistory();
-            board.ExitToSimulationFile(outFile); // pass in the output file to the function
-        }
-        // Clear the window and draw updated bug positions
-        board.drawAll();
-    }
-    cout << "---ONE BUG STANDING---" << endl;
-    board.displayLifeHistory();
-    board.drawAll(); // draw updated bug positions
-}*/
