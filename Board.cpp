@@ -228,7 +228,7 @@ void Board::drawAll() const {
     cellShape.setOutlineColor(sf::Color::Black);
     cellShape.setOutlineThickness(2); // Thickness of the outline
 
-    // Run through each cell
+    // DRAWING ALL CELLS
     for (int x = 0; x < cells.size(); ++x) {
         for (int y = 0; y < cells[x].size(); ++y) {
             // Set the position & draw the cell shape
@@ -237,22 +237,31 @@ void Board::drawAll() const {
 
             // Check if the cell pointer is not nullptr & if there are any bugs on it
             if (cells[x][y] != nullptr && !cells[x][y]->bugsCellList.empty()) {
-                // for each bug in the cell: draw a shape, set a colour & position center of cell
-                for (Bug* bug : cells[x][y]->bugsCellList){
-                    sf::CircleShape bugShape(bug->getSize()); // reduce bug shape to fit inside cell grid based on their size
-                    if (bug->getName() == "Crawler")
-                        bugShape.setFillColor(sf::Color::Red); // Set bug color to red
-                    else if (bug->getName() == "Hopper")
-                        bugShape.setFillColor(sf::Color::Green); // Set bug color to red
-                    else if (bug->getName() == "Flyer")
-                        bugShape.setFillColor(sf::Color::Blue); // Set bug color to red
-                    else
-                        bugShape.setFillColor(sf::Color::Black); // Set bug color to red
-                    // Calculate the position to center the bug shape to the cell
+                sf::Texture bugTexture;
+                sf::Sprite bugSprite(bugTexture);
+                // DRAWING ALL BUGS
+                for (Bug* bug : cells[x][y]->bugsCellList){ // for each bug in the cell: set position, set texture, draw
+                    // Calculate the position to center the bug sprite to the cell
                     float bugPosX = x * cellSizeX + (cellSizeX - bug->getSize()) / 2 - bug->getSize() / 2;
                     float bugPosY = y * cellSizeY + (cellSizeY - bug->getSize()) / 2 - bug->getSize() / 2;
-                    bugShape.setPosition(bugPosX, bugPosY);
-                    window.draw(bugShape); // Draw the bug
+                    bugSprite.setPosition(bugPosX, bugPosY);
+
+                    bugSprite.setScale(bug->getSize()/2, bug->getSize()/2);
+                    //sf::CircleShape bugShape(bug->getSize()); // Create circle bug shape to fit inside cell grid based on their size
+                    if (bug->getName() == "Crawler")
+                        bugTexture.loadFromFile("Bug Images/Crawler.png");
+                        //bugShape.setFillColor(sf::Color::Red); // Set bug color to red
+                    else if (bug->getName() == "Bug Images/Hopper")
+                        bugTexture.loadFromFile("Bug Images/Hopper.png");
+                        //bugShape.setFillColor(sf::Color::Green); // Set bug color to red
+                    else if (bug->getName() == "Flyer")
+                        bugTexture.loadFromFile("Bug Images/Flyer.png");
+                        //bugShape.setFillColor(sf::Color::Blue); // Set bug color to red
+                    else
+                        bugTexture.loadFromFile("Bug Images/SuperBug.png");
+                        //bugShape.setFillColor(sf::Color::Black); // Set bug color to red
+
+                    window.draw(bugSprite); // Draw the bug sprite
                 }
             }
         }
