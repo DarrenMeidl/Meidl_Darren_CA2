@@ -8,8 +8,6 @@
 #include "Bug.h"
 using namespace std;
 
-void RunSimulation(Board &board, sf::RenderWindow &window);
-
 int main() {
     sf::RenderWindow window(sf::VideoMode(800, 800), "Bug's Life Project");
     Board board(10, 10, window); // Create a new board
@@ -67,7 +65,7 @@ int main() {
                 break;
             case 8:
                 cout << "Running simulation.." << endl;
-                RunSimulation(board, window);
+                board.RunSimulation();
                 window.close();
                 cout << "Simulation over." << endl;
                 break;
@@ -83,6 +81,7 @@ int main() {
 
     return 0;
 }
+/*
 // Feature 9
 void RunSimulation(Board &board, sf::RenderWindow &window){
     string outFile("../bugs_life_simulation.out");
@@ -105,5 +104,4 @@ void RunSimulation(Board &board, sf::RenderWindow &window){
     cout << "---ONE BUG STANDING---" << endl;
     board.displayLifeHistory();
     board.drawAll(); // draw updated bug positions
-}
-
+}*/

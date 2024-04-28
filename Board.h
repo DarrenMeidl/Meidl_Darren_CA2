@@ -24,14 +24,7 @@ private:
 public:
     // Constructor which allows us to set the dimensions of the board - Each row (x) has a corresponding list columns (y)
     Board(int rows, int cols, sf::RenderWindow& window) : cells(rows, vector<Cell*>(cols)), boardHeight(cols), boardWidth(rows), window(window) {}
-    // Getters & Setters (Cells)
-    int getCellValue(int row, int col) const; // get a value of a cell at any position in the board
-    void setCellValue(int row, int col, int value); // set a value of a cell at any position in the board
-    void fillInCells(); // fills in cells into the cells vector
-
-    void FreeMemoryAllocated();
-
-    // Main Features - might need this: vector<Bug*> const &v
+    // Main Features
     void fillInBugs();
     void printAllBugs() const;
     void findBugByID() const;
@@ -39,14 +32,14 @@ public:
     void displayLifeHistory() const;
     void Exit() const;
     void displayAllCells() const;
-    void runSimulation();
+    void RunSimulation();
     void drawAll() const;
     void HandleSuperBugInput();
     // Other
-    void displayAllCellsLiving() const;
+    void fillInCells(); // fills in cells into the cells vector
+    void FreeMemoryAllocated();
     bool oneBugRemains() const;
     void ExitToSimulationFile(string &file) const;
-    void delay(int seconds);
 };
 
 
