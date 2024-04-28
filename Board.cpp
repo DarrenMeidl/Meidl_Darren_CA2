@@ -183,10 +183,10 @@ void Board::Exit() const {
     }
 
     time_t currentTime = time(nullptr); // get the current time
-    struct tm* localTime = localtime(&currentTime); // contains info for year,month etc. from currentTime
+    tm* localTime = localtime(&currentTime); // contains info for year,month etc. from currentTime
     char dateTimeStr[100]; // buffer for date and time string
     strftime(dateTimeStr, sizeof(dateTimeStr), "%Y-%m-%d %H:%M:%S", localTime);
-    file << "Life History Export - Date and Time: " << dateTimeStr << endl;
+    file << "Life History Saved at: " << dateTimeStr << endl;
 
     // Write the life history of all bugs to the file
     for (Bug* bug : bugsVector) { // run through all the bugs in the vector
