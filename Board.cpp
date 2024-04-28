@@ -218,6 +218,7 @@ void Board::displayAllCells() const {
 }
 // Feature 11 - SFML
 void Board::drawAll() const {
+    window.clear();
     // Calculate the size of each cell based on the window size and the number of cells
     float cellSizeX = window.getSize().x / cells.size();
     float cellSizeY = window.getSize().y / cells[0].size();
@@ -271,6 +272,7 @@ void Board::drawAll() const {
             }
         }
     }
+    window.display();
 }
 // Feature 11 - SUPERBUG INPUT
 void Board::HandleSuperBugInput(){

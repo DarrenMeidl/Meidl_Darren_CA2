@@ -43,7 +43,6 @@ int main() {
                 board.fillInBugs();
                 board.fillInCells();
                 board.drawAll();
-                window.display();
                 cout << "Bugs filled in!" << endl;
                 break;
             case 2:
@@ -108,14 +107,10 @@ void RunSimulation(Board &board, sf::RenderWindow &window){
             board.ExitToSimulationFile(outFile); // pass in the output file to the function
         }
         // Clear the window and draw updated bug positions
-        window.clear();
         board.drawAll();
-        window.display();
     }
     cout << "---ONE BUG STANDING---" << endl;
     board.displayLifeHistory();
-    window.clear();
     board.drawAll(); // draw updated bug positions
-    window.display(); // display the new window
 }
 
