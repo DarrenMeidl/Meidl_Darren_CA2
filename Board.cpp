@@ -247,8 +247,8 @@ void Board::drawAll() const {
                     sf::Sprite bugSprite;
 
                     // Calculate the position to center the bug sprite to the cell
-                    float bugPosX = x * cellSizeX + (cellSizeX - bug->getSize()) / 2;
-                    float bugPosY = y * cellSizeY + (cellSizeY - bug->getSize()) / 2;
+                    float bugPosX = x * cellSizeX + (cellSizeX/6);
+                    float bugPosY = y * cellSizeY + (cellSizeY/6);
 
                     bugSprite.setPosition(bugPosX, bugPosY); // set the position
 
@@ -259,7 +259,7 @@ void Board::drawAll() const {
 
                     if (bug->getName() == "Crawler")
                         bugTexture.loadFromFile("../Bug Images/Crawler.png");
-                    else if (bug->getName() == "Bug Images/Hopper")
+                    else if (bug->getName() == "Hopper")
                         bugTexture.loadFromFile("../Bug Images/Hopper.png");
                     else if (bug->getName() == "Flyer")
                         bugTexture.loadFromFile("../Bug Images/Flyer.png");
