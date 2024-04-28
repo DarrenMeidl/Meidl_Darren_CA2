@@ -169,9 +169,12 @@ void Board::displayLifeHistory() const {
         for (const auto& pair : bug->getPath()){
             cout << "(" << pair.first << ", " << pair.second << "), "; // print each int from the pair seperately
         }
-        cout << (bug->getAlive() ? "Alive!" : "Eaten.") << endl;
+        if (bug->getAlive())
+            cout << "Alive!" << endl;
+        else
+            cout << "Eaten by " << bug->getEatenByID() << endl; // If eaten, return id of the bug that killed this bug
     }
-    cout << "" << endl;
+    cout << endl;
 }
 // Menu Option 6
 void Board::Exit() const {
@@ -188,12 +191,16 @@ void Board::Exit() const {
     file << "Life History Export - Date and Time: " << dateTimeStr << endl;
 
     // Write the life history of all bugs to the file
-    for (Bug* bug : bugsVector) {
-        file << bug->getID() << " " << bug->getName() << " Path: ";
-        for (const auto& pair : bug->getPath()) {
-            file << "(" << pair.first << ", " << pair.second << "), ";
+    for (Bug* bug : bugsVector) { // run through all the bugs in the vector
+        cout << bug->getID() << " " << bug->getName() << " Path: "; // print id & name
+        // iterate through this bug's list called 'path'
+        for (const auto& pair : bug->getPath()){
+            cout << "(" << pair.first << ", " << pair.second << "), "; // print each int from the pair seperately
         }
-        file << (bug->getAlive() ? "Alive!" : "Eaten.") << endl;
+        if (bug->getAlive())
+            cout << "Alive!" << endl;
+        else
+            cout << "Eaten by " << bug->getEatenByID() << endl; // If eaten, return id of the bug that killed this bug
     }
     file.close();
 }

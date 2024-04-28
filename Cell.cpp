@@ -90,6 +90,7 @@ void Cell::Fight(){
         for (Bug* b : bugsCellList){
             if (b->getID() != winner->getID()){
                 b->setAlive(false);
+                b->setEatenByID(winner->getID());
                 winner->setSize(winner->getSize() + b->getSize()); // add their size to the winner's i.e. winner absorbs all bugs sizes
                 if (winner->getSize() > 20) // Cap winner's size to 20 if it exceeds 20
                     winner->setSize(20);

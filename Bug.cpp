@@ -52,8 +52,8 @@ void Bug::setSize(int size){
     this->size = size;
 }
 int Bug::getEatenByID() const {
-    return eatenBy->getID();
+    return eatenByID;
 }
-void Bug::setEatenBy(Bug* bug) {
-    eatenBy = bug;
+void Bug::setEatenByID(int id) {
+    this->eatenByID = id;
 }
